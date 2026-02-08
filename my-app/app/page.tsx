@@ -226,8 +226,8 @@ function LandingPageFooter() {
               Contact Info
             </h3>
             <ul className="mt-4 space-y-3 text-sm text-gray-400">
-              <li>Email: info@maryamag.com</li>
-              <li>Phone: +92 300 0000000</li>
+              <li>Email: harisanwarali@gmail.com</li>
+              <li>Phone: +92 3233541250</li>
               <li>Location: Pakistan</li>
               <li>Available: 9 AM - 6 PM</li>
             </ul>
