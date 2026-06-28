@@ -61,7 +61,7 @@ export default function CoreValuesGrid() {
         >
           <motion.h2
             variants={itemVariants}
-            className="text-4xl sm:text-5xl font-bold text-slate-900 mb-4"
+            className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4"
           >
             What Sets Us Apart
           </motion.h2>
@@ -71,7 +71,7 @@ export default function CoreValuesGrid() {
           ></motion.div>
           <motion.p
             variants={itemVariants}
-            className="text-lg text-slate-600 max-w-2xl mx-auto"
+            className="text-lg text-gray-300 max-w-2xl mx-auto"
           >
             These principles guide every decision we make, from material selection
             to customer relationships.
@@ -92,15 +92,15 @@ export default function CoreValuesGrid() {
               <motion.div
                 key={index}
                 variants={itemVariants}
-                className="bg-white/5 backdrop-blur-sm p-8 rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 border border-white/10 hover:border-white/20 hover:bg-white/10 hover:scale-105"
+                className="bg-white/10 backdrop-blur-md p-6 sm:p-8 rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 border border-white/20 hover:border-white/30 hover:bg-white/15 hover:scale-105 h-full"
               >
-                <div className="text-5xl mb-4 transition-transform duration-300 text-blue-600">
+                <div className="text-4xl sm:text-5xl mb-4 transition-transform duration-300 text-blue-400">
                   <IconComponent />
                 </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-3">
+                <h3 className="text-xl font-bold text-white mb-3">
                   {value.title}
                 </h3>
-                <p className="text-slate-700 leading-relaxed">{value.description}</p>
+                <p className="text-gray-200 leading-relaxed">{value.description}</p>
               </motion.div>
             )
           })}

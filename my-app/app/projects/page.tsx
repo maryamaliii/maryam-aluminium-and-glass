@@ -1,93 +1,55 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import ProjectCard from '@/components/ProjectCard';
-import Header from '@/app/components/Header';
-import Footer from '@/app/components/Footer';
-
-// Mock data for projects - in a real app, this would come from an API or CMS
-const projects = [
-  {
-    id: '1',
-    title: 'Modern Glass Facade',
-    service: 'Glass Partitions',
-    image: '/images/services/partitions/partition1.jpg',
-    description: 'Stunning frameless glass walls that create an open, bright workspace while maintaining functionality.'
-  },
-  {
-    id: '2',
-    title: 'Aluminium Window System',
-    service: 'Windows & Doors',
-    image: '/images/services/windows/windows2.jpg',
-    description: 'Energy-efficient aluminium windows with sleek design and superior thermal performance.'
-  },
-  {
-    id: '3',
-    title: 'Custom Kitchen Solution',
-    service: 'Kitchens',
-    image: '/images/services/kitchen/kitchen1.jpg',
-    description: 'Premium kitchen cabinetry with modern aluminium and glass elements for contemporary appeal.'
-  },
-  {
-    id: '4',
-    title: 'Mirror Installation',
-    service: 'Mirrors',
-    image: '/images/services/mirrors/mirror1.jpg',
-    description: 'Custom decorative mirrors that enhance space and bring elegance to any interior.'
-  },
-  {
-    id: '5',
-    title: 'Office Partition System',
-    service: 'Glass Partitions',
-    image: '/images/services/partitions/partition2.jpg',
-    description: 'Professional glass office dividers that create privacy while maintaining an open feel.'
-  },
-  {
-    id: '6',
-    title: 'Sliding Wardrobe',
-    service: 'Wardrobes',
-    image: '/images/services/wardrobes/wardrobe1.jpg',
-    description: 'Space-saving sliding wardrobes with custom storage solutions and premium finishes.'
-  },
-  {
-    id: '7',
-    title: 'Balustrade System',
-    service: 'Installation',
-    image: '/images/services/fixtures/fixture8.jpg',
-    description: 'Professional stair railings and balustrades with modern aluminium and glass design.'
-  },
-  {
-    id: '8',
-    title: 'Custom Glass Door',
-    service: 'Windows & Doors',
-    image: '/images/services/windows/windows4.jpg',
-    description: 'Frameless glass doors that create seamless transitions between spaces.'
-  },
-  {
-    id: '9',
-    title: 'Retail Storefront',
-    service: 'Custom Fabrication',
-    image: '/images/storefront.jpg',
-    description: 'Custom aluminium and glass storefront solutions for commercial applications.'
-  }
-];
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import ProjectCard from "@/components/ProjectCard";
+import Header from "@/app/components/Header";
+import Footer from "@/app/components/Footer";
+import { usePageMetadata } from "@/lib/use-page-metadata";
+import type { ProjectResponse, ServiceResponse } from "@/types";
 
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.15
-    }
-  }
+      staggerChildren: 0.15,
+    },
+  },
 };
 
 const itemVariants = {
   hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
 };
 
 export default function ProjectsPage() {
+  usePageMetadata(
+    "Projects",
+    "Explore our portfolio of premium aluminium and glass projects — residential and commercial installations crafted with precision."
+  )
+  const [projects, setProjects] = useState<ProjectResponse[]>([]);
+  const [services, setServices] = useState<ServiceResponse[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [activeFilter, setActiveFilter] = useState("");
+
+  useEffect(() => {
+    Promise.all([
+      fetch("/api/projects").then((r) => r.json()),
+      fetch("/api/services").then((r) => r.json()),
+    ])
+      .then(([projectsData, servicesData]) => {
+        if (projectsData.success) setProjects(projectsData.data.projects);
+        if (servicesData.success) setServices(servicesData.data);
+      })
+      .catch(console.error)
+      .finally(() => setLoading(false));
+  }, []);
+
+  const filteredProjects = activeFilter
+    ? projects.filter((p) => p.service.slug === activeFilter)
+    : projects;
+
   return (
     <div
       className="w-full min-h-screen"
@@ -98,48 +60,99 @@ export default function ProjectsPage() {
         backgroundPosition: "center",
       }}
     >
-      {/* dark overlay */}
       <div className="fixed inset-0 bg-black/40 pointer-events-none z-0" />
 
       <div className="relative z-10">
         <Header />
 
-        <main className="pt-24 pb-20">
-          {/* Hero Section */}
+        <main className="pt-20 sm:pt-24 pb-16 sm:pb-20">
           <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: '-100px' }}
+            viewport={{ once: true, margin: "-100px" }}
             variants={containerVariants}
             className="text-center mb-20 px-6"
           >
             <motion.h1
               variants={itemVariants}
-              className="text-5xl md:text-6xl font-bold text-white mb-6"
+              className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6"
             >
               Our <span className="bg-gradient-to-r from-blue-600 to-slate-700 bg-clip-text text-transparent">Projects</span>
             </motion.h1>
             <motion.p
               variants={itemVariants}
-              className="text-lg text-white/80 max-w-3xl mx-auto"
+              className="text-base sm:text-lg text-white/80 max-w-3xl mx-auto px-2 sm:px-0"
             >
               Discover our portfolio of premium aluminium and glass solutions crafted with precision and attention to detail.
             </motion.p>
           </motion.div>
 
-          {/* Projects Grid */}
-          <div className="max-w-7xl mx-auto px-6">
-            <motion.div
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-100px' }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-            >
-              {projects.map((project, index) => (
-                <ProjectCard key={project.id} project={project} index={index} />
-              ))}
-            </motion.div>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6">
+            {loading ? (
+              <div className="flex justify-center py-20">
+                <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin" />
+              </div>
+            ) : (
+              <>
+                {/* Filter Buttons */}
+                {services.length > 0 && (
+                  <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-10 sm:mb-12">
+                    <button
+                      onClick={() => setActiveFilter("")}
+                      className={`px-4 sm:px-5 py-2.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 ${
+                        activeFilter === ""
+                          ? "bg-blue-600 text-white shadow-lg"
+                          : "bg-white/10 text-gray-200 border border-white/20 hover:bg-white/20"
+                      }`}
+                    >
+                      All
+                    </button>
+                    {services.map((s) => (
+                      <button
+                        key={s.id}
+                        onClick={() => setActiveFilter(s.slug)}
+                        className={`px-4 sm:px-5 py-2.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 ${
+                          activeFilter === s.slug
+                            ? "bg-blue-600 text-white shadow-lg"
+                            : "bg-white/10 text-gray-200 border border-white/20 hover:bg-white/20"
+                        }`}
+                      >
+                        {s.title}
+                      </button>
+                    ))}
+                  </div>
+                )}
+
+                {/* No results */}
+                {filteredProjects.length === 0 ? (
+                  <div className="text-center py-20">
+                    <p className="text-gray-400 text-lg">No projects found in this category.</p>
+                  </div>
+                ) : (
+                  <motion.div
+                    variants={containerVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-100px" }}
+                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+                  >
+                    {filteredProjects.map((project, index) => (
+                      <ProjectCard
+                        key={project.id}
+                        project={{
+                          id: project.id,
+                          title: project.title,
+                          service: project.service.title,
+                          image: project.image,
+                          description: project.description,
+                        }}
+                        index={index}
+                      />
+                    ))}
+                  </motion.div>
+                )}
+              </>
+            )}
           </div>
         </main>
 

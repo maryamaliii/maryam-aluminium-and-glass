@@ -1,18 +1,14 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useSyncExternalStore } from 'react';
 import { motion } from 'framer-motion';
 
 const WhatsAppButton = () => {
-  const [isMounted, setIsMounted] = useState(false);
+  const isMounted = useSyncExternalStore(() => () => {}, () => true, () => false);
   const phoneNumber = '923233541250';
   const defaultMessage = 'Hello, I would like to get a quote for aluminium and glass work.';
   const encodedMessage = encodeURIComponent(defaultMessage);
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
 
   if (!isMounted) {
     return null;

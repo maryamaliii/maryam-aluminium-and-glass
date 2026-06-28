@@ -35,23 +35,24 @@ export default function CompanyStory() {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={slideInLeftVariants}
+            className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 sm:p-8"
           >
             <div className="space-y-6">
               <div>
-                <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-4">
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
                   Precision & Trust
                 </h2>
                 <div className="w-16 h-1 bg-gradient-to-r from-blue-600 to-slate-700"></div>
               </div>
 
-              <p className="text-lg text-slate-700 leading-relaxed">
-                With over a decade in aluminium and glass, we've evolved from a
+              <p className="text-base sm:text-lg text-slate-700 leading-relaxed">
+                With over a decade in aluminium and glass,                 we&apos;ve evolved from a
                 passionate startup into a trusted partner for residential and
                 commercial projects. We began with one belief: premium materials
                 and skilled craftsmanship create lasting solutions.
               </p>
 
-              <p className="text-lg text-slate-700 leading-relaxed">
+              <p className="text-base sm:text-lg text-slate-700 leading-relaxed">
                 Today, we blend traditional precision with modern design. Every
                 project reflects our commitment to excellence—from consultation
                 through final installation. We craft architectural solutions that
@@ -75,7 +76,7 @@ export default function CompanyStory() {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={scaleInVariants}
-            className="relative h-72 sm:h-96 rounded-2xl overflow-hidden shadow-2xl"
+            className="relative h-56 sm:h-72 lg:h-96 rounded-2xl overflow-hidden shadow-2xl"
           >
             <Image
               src="/images/about-workspace.jpg"

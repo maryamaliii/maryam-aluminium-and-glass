@@ -38,7 +38,6 @@ const ProjectsSection = ({
   projects,
   title = 'Featured Projects',
   subtitle = 'Showcasing our finest work',
-  showViewAll = false,
   limit
 }: ProjectsSectionProps) => {
   const displayProjects = limit ? projects.slice(0, limit) : projects;
@@ -53,8 +52,8 @@ const ProjectsSection = ({
           viewport={{ once: true, margin: '-100px' }}
           variants={headerVariants}
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">{title}</h2>
-          <p className="text-xl text-gray-200 max-w-2xl mx-auto">{subtitle}</p>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">{title}</h2>
+          <p className="text-base sm:text-lg lg:text-xl text-gray-200 max-w-2xl mx-auto">{subtitle}</p>
         </motion.div>
 
         <motion.div

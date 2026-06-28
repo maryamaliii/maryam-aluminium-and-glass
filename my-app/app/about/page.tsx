@@ -7,6 +7,7 @@ import Link from "next/link"
 import Header from "@/app/components/Header"
 import Footer from "@/app/components/Footer"
 import RecentProjects from "@/app/components/RecentProjects"
+import { usePageMetadata } from "@/lib/use-page-metadata"
 import { MdBuild, MdPalette, MdConstruction, MdHandshake, MdShoppingCart, MdRocketLaunch } from "react-icons/md"
 
 // ============================================================================
@@ -87,17 +88,17 @@ function HeroSection() {
       >
         <motion.h1
           variants={slideInLeftVariants}
-          className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 tracking-tight text-white"
+          className="text-4xl sm:text-5xl lg:text-7xl font-bold mb-4 sm:mb-6 tracking-tight text-white"
         >
           About{" "}
           <span className="bg-gradient-to-r from-blue-600 to-slate-700 bg-clip-text text-transparent">
-            Maryam Aluminium & Glass
+            Meer Engineering
           </span>
         </motion.h1>
 
         <motion.p
           variants={slideInRightVariants}
-          className="text-xl sm:text-2xl text-slate-600 mb-8 leading-relaxed"
+          className="text-lg sm:text-xl lg:text-2xl text-gray-200 mb-6 sm:mb-8 leading-relaxed px-2 sm:px-0"
         >
           A decade of excellence in aluminium fabrication and glass innovation,
           crafted with precision and delivered with integrity.
@@ -105,17 +106,17 @@ function HeroSection() {
 
         <motion.div
           variants={fadeInVariants}
-          className="flex flex-col sm:flex-row gap-4 justify-center"
+          className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4 sm:px-0"
         >
           <Link
             href="/contact"
-            className="px-8 py-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-300"
+            className="w-full sm:w-auto text-center px-8 py-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-300"
           >
             Get in Touch
           </Link>
           <Link
             href="#journey"
-            className="px-8 py-4 border-2 border-slate-300 text-slate-900 font-semibold rounded-lg hover:border-slate-400 hover:bg-slate-50 transition-colors duration-300"
+            className="w-full sm:w-auto text-center px-8 py-4 border-2 border-white/30 text-white font-semibold rounded-lg hover:border-white/60 hover:bg-white/10 transition-colors duration-300"
           >
             Learn Our Story
           </Link>
@@ -143,33 +144,34 @@ function StorySection() {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={slideInLeftVariants}
+            className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 sm:p-8"
           >
             <div className="space-y-6">
               <div>
-                <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-4">
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-3 sm:mb-4">
                   A Foundation Built on Quality
                 </h2>
                 <div className="w-16 h-1 bg-gradient-to-r from-blue-600 to-slate-700"></div>
               </div>
 
-              <p className="text-lg text-slate-700 leading-relaxed">
-                With over a decade in the aluminium and glass industry, Maryam
+              <p className="text-base sm:text-lg text-slate-700 leading-relaxed">
+                With over a decade in the aluminium and glass industry, Meer Engineering
                 has evolved from a passionate startup into a trusted partner for
                 residential and commercial projects across the region. We began
                 with a simple belief: premium materials and skilled craftsmanship
                 create lasting solutions.
               </p>
 
-              <p className="text-lg text-slate-700 leading-relaxed">
+              <p className="text-base sm:text-lg text-slate-700 leading-relaxed">
                 Today, we blend traditional precision metalworking with modern
                 design sensibilities. Every project we undertake reflects our
                 commitment to excellence—from initial consultation through final
-                installation. We don't just build windows and glass structures;
+                installation. We don&apos;t just build windows and glass structures;
                 we craft architectural solutions that enhance spaces and stand
                 the test of time.
               </p>
 
-              <p className="text-lg text-slate-700 leading-relaxed">
+              <p className="text-base sm:text-lg text-slate-700 leading-relaxed">
                 Our team consists of experienced craftsmen and designers who
                 understand that aluminium and glass are not merely materials—they
                 are mediums for creating beauty, light, and functionality.
@@ -192,7 +194,7 @@ function StorySection() {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={scaleInVariants}
-            className="relative h-96 sm:h-[500px] rounded-2xl overflow-hidden shadow-2xl"
+            className="relative h-64 sm:h-80 lg:h-[500px] rounded-2xl overflow-hidden shadow-2xl"
           >
             {/* Placeholder for company/workspace image */}
             <div className="w-full h-full bg-gradient-to-br from-slate-300 to-slate-400 flex items-center justify-center">
@@ -218,7 +220,7 @@ function StorySection() {
             </div>
             <Image
               src="/images/about-workspace.jpg"
-              alt="Maryam Aluminium & Glass workspace"
+              alt="Meer Engineering workspace"
               fill
               className="object-cover"
             />
@@ -287,7 +289,7 @@ function ValuesSection() {
           variants={containerVariants}
           className="text-center mb-16"
         >
-          <motion.h2 variants={itemVariants} className="text-4xl sm:text-5xl font-bold text-slate-900 mb-4">
+          <motion.h2 variants={itemVariants} className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
             Our Core Values
           </motion.h2>
           <motion.div variants={itemVariants} className="w-16 h-1 bg-gradient-to-r from-blue-600 to-slate-700 mx-auto mb-6"></motion.div>
@@ -310,9 +312,9 @@ function ValuesSection() {
               <motion.div
                 key={index}
                 variants={itemVariants}
-                className="bg-white/10 backdrop-blur-md p-8 rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 border border-white/20 hover:border-white/40 hover:bg-white/20 hover:scale-105"
+                className="bg-white/10 backdrop-blur-md p-6 sm:p-8 rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 border border-white/20 hover:border-white/40 hover:bg-white/20 hover:scale-105 h-full"
               >
-                <div className="text-5xl mb-4 transition-transform duration-300 text-blue-400">
+                <div className="text-4xl sm:text-5xl mb-4 transition-transform duration-300 text-blue-400">
                   <IconComponent />
                 </div>
                 <h3 className="text-xl font-bold text-white mb-3">
@@ -386,11 +388,11 @@ function ExpertiseSection() {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={slideInRightVariants}
-            className="order-1 lg:order-2"
+            className="order-1 lg:order-2 bg-white/60 backdrop-blur-sm rounded-2xl p-6 sm:p-8"
           >
             <div className="space-y-6">
               <div>
-                <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-4">
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
                   Our Expertise in Action
                 </h2>
                 <div className="w-16 h-1 bg-gradient-to-r from-blue-600 to-slate-700"></div>
@@ -519,7 +521,7 @@ function ProcessSection() {
           variants={containerVariants}
           className="text-center mb-16"
         >
-          <motion.h2 variants={itemVariants} className="text-4xl sm:text-5xl font-bold text-slate-900 mb-4">
+          <motion.h2 variants={itemVariants} className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
             Our Process
           </motion.h2>
           <motion.div variants={itemVariants} className="w-16 h-1 bg-gradient-to-r from-blue-600 to-slate-700 mx-auto mb-6"></motion.div>
@@ -604,10 +606,10 @@ function TrustSection() {
               variants={itemVariants}
               className="text-center p-6 bg-white/10 rounded-xl backdrop-blur-md border border-white/20 hover:border-white/40 transition-all duration-300 hover:bg-white/20 hover:shadow-lg hover:scale-105"
             >
-              <div className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent mb-2">
+              <div className="text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent mb-2">
                 {stat.number}
               </div>
-              <p className="text-lg text-white/80">{stat.label}</p>
+              <p className="text-base sm:text-lg text-white/80">{stat.label}</p>
             </motion.div>
           ))}
         </motion.div>
@@ -621,8 +623,8 @@ function TrustSection() {
         >
           <p className="text-xl text-white/90 mb-8 max-w-3xl mx-auto leading-relaxed">
             Over a decade of consistent delivery has earned us the trust of
-            hundreds of satisfied clients. We're not just a service provider—we're
-            a partner invested in your project's success.
+            hundreds of satisfied clients. We&apos;re not just a service provider&mdash;we&apos;re
+            a partner invested in your project&apos;s success.
           </p>
         </motion.div>
       </div>
@@ -642,37 +644,37 @@ function CTASection() {
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={containerVariants}
-        className="max-w-4xl mx-auto text-center"
+        className="max-w-4xl mx-auto text-center bg-white/60 backdrop-blur-sm rounded-2xl p-6 sm:p-12"
       >
         <motion.h2
           variants={itemVariants}
-          className="text-4xl sm:text-5xl font-bold text-slate-900 mb-6"
+          className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 sm:mb-6"
         >
           Ready to Transform Your Space?
         </motion.h2>
 
         <motion.p
           variants={itemVariants}
-          className="text-xl text-slate-600 mb-8 leading-relaxed"
+          className="text-base sm:text-lg lg:text-xl text-slate-600 mb-6 sm:mb-8 leading-relaxed"
         >
-          Let's discuss your project. Contact our team today for a free
-          consultation and discover how Maryam Aluminium & Glass can bring your
+           Let&apos;s discuss your project. Contact our team today for a free
+          consultation and discover how Meer Engineering can bring your
           vision to life.
         </motion.p>
 
         <motion.div
           variants={itemVariants}
-          className="flex flex-col sm:flex-row gap-4 justify-center"
+          className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center"
         >
           <Link
             href="/contact"
-            className="px-8 py-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-300"
+            className="w-full sm:w-auto text-center px-6 sm:px-8 py-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-300"
           >
             Start Your Project
           </Link>
           <Link
             href="/portfolio"
-            className="px-8 py-4 border-2 border-slate-300 text-slate-900 font-semibold rounded-lg hover:border-slate-400 hover:bg-slate-50 transition-colors duration-300"
+            className="w-full sm:w-auto text-center px-6 sm:px-8 py-4 border-2 border-slate-300 text-slate-900 font-semibold rounded-lg hover:border-slate-400 hover:bg-slate-50 transition-colors duration-300"
           >
             View Portfolio
           </Link>
@@ -687,6 +689,10 @@ function CTASection() {
 // ============================================================================
 
 export default function AboutPage() {
+  usePageMetadata(
+    "About",
+    "Learn about Meer Engineering — over a decade of excellence in aluminium fabrication and glass innovation in Pakistan."
+  )
   return (
     <div className="w-full" style={{
       backgroundImage: "url('/bg.jpg')",

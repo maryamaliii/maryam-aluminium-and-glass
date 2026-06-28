@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 
 const links = [
   { name: "Home", href: "/" },
@@ -16,6 +16,7 @@ const links = [
 export default function Navbar() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+  const isAdmin = useSyncExternalStore(() => () => {}, () => !!localStorage.getItem("token"), () => false);
 
   return (
     <nav className="relative">
@@ -28,17 +29,17 @@ export default function Navbar() {
       </button>
 
       <ul
-        className={`absolute right-0 top-12 w-48 rounded-lg bg-white/10 backdrop-blur-md shadow-lg border border-white/20 transition-all duration-300
-        md:static md:flex md:w-auto md:shadow-none md:bg-transparent md:border-0
-        ${isOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2 md:opacity-100 md:translate-y-0"}
+        className={`absolute right-0 top-14 w-56 rounded-xl bg-gray-900/95 backdrop-blur-md shadow-xl border border-white/10 transition-all duration-300 py-2
+        md:static md:flex md:w-auto md:shadow-none md:bg-transparent md:border-0 md:py-0 md:space-y-0
+        ${isOpen ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-2 pointer-events-none md:opacity-100 md:translate-y-0 md:pointer-events-auto"}
         `}
       >
         {links.map(link => (
           <li key={link.href}>
             <Link
               href={link.href}
-              className={`block px-4 py-2 transition-colors
-              ${pathname === link.href ? "text-white font-semibold" : "text-gray-200 hover:text-white"}
+              className={`block px-4 py-2.5 mx-2 rounded-lg text-sm transition-colors
+              ${pathname === link.href ? "text-white font-semibold bg-white/10" : "text-gray-300 hover:text-white hover:bg-white/5"}
               `}
               onClick={() => setIsOpen(false)}
             >
@@ -46,6 +47,17 @@ export default function Navbar() {
             </Link>
           </li>
         ))}
+        {isAdmin && (
+          <li>
+            <Link
+              href="/admin/dashboard"
+              className="block px-4 py-2.5 mx-2 rounded-lg text-sm text-blue-300 hover:text-blue-200 hover:bg-white/5 font-medium transition-colors"
+              onClick={() => setIsOpen(false)}
+            >
+              Admin
+            </Link>
+          </li>
+        )}
       </ul>
     </nav>
   );

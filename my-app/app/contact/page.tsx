@@ -5,7 +5,8 @@ import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
 import Header from "@/app/components/Header";
 import Footer from "@/app/components/Footer";
-import Link from "next/link";
+import FAQSection from "@/components/FAQSection";
+import { usePageMetadata } from "@/lib/use-page-metadata";
 
 // Animation Variants
 const containerVariants: Variants = {
@@ -57,14 +58,20 @@ const buttonVariants: Variants = {
 };
 
 export default function ContactPage() {
+  usePageMetadata(
+    "Contact",
+    "Get in touch with Meer Engineering for a free consultation. We serve residential and commercial clients across Pakistan."
+  )
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
-    message: ""
+    message: "",
+    _hp: "", // honeypot for spam bots
   });
   const [formStatus, setFormStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errorMsg, setErrorMsg] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -122,32 +129,42 @@ export default function ContactPage() {
     setFormStatus("submitting");
 
     try {
-      const response = await fetch("https://formspree.io/f/mlgbavkz", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone,
-          message: formData.message,
-        }),
-      });
-
-      if (response.ok) {
+      // Honeypot check
+      if (formData._hp) {
         setFormStatus("success");
-        // Reset form after successful submission
+        return;
+      }
+
+      const response = await fetch("/api/contact", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: formData.name,
+            email: formData.email,
+            phone: formData.phone,
+            message: formData.message,
+          }),
+        });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        setFormStatus("success");
         setFormData({
           name: "",
           email: "",
           phone: "",
-          message: ""
+          message: "",
+          _hp: "",
         });
       } else {
+        setErrorMsg(result.error || "Something went wrong. Please try again.");
         setFormStatus("error");
       }
-    } catch (error) {
+    } catch {
+      setErrorMsg("Network error. Please check your connection and try again.");
       setFormStatus("error");
     }
   };
@@ -168,7 +185,7 @@ export default function ContactPage() {
       <div className="relative z-10 flex flex-col min-h-screen">
         <Header />
 
-        <main className="flex-1 py-16 px-4 sm:px-6 lg:px-8">
+        <main className="flex-1 py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
             {/* Hero Section */}
             <motion.div
@@ -180,14 +197,14 @@ export default function ContactPage() {
             >
               <motion.h1
                 variants={itemVariants}
-                className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6"
+                className="text-3xl sm:text-4xl lg:text-6xl font-bold text-white mb-4 sm:mb-6"
               >
                 Get in <span className="bg-gradient-to-r from-blue-600 to-slate-700 bg-clip-text text-transparent">Touch</span>
               </motion.h1>
 
               <motion.p
                 variants={itemVariants}
-                className="text-xl text-gray-200 max-w-2xl mx-auto"
+                className="text-base sm:text-lg lg:text-xl text-gray-200 max-w-2xl mx-auto px-2 sm:px-0"
               >
                 Have questions about our aluminium and glass services? Reach out to our team for a personalized consultation and quote.
               </motion.p>
@@ -203,9 +220,9 @@ export default function ContactPage() {
                 className="space-y-8"
               >
                 <motion.div variants={itemVariants}>
-                  <h2 className="text-2xl font-bold text-white mb-6">Contact Information</h2>
-                  <p className="text-gray-200 mb-8">
-                    We're here to answer any questions about our aluminium fabrication and glass solutions.
+                  <h2 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6">Contact Information</h2>
+                  <p className="text-gray-200 mb-6 sm:mb-8">
+                    We&apos;re here to answer any questions about our aluminium fabrication and glass solutions.
                     Our team is available to discuss your project requirements and provide expert guidance.
                   </p>
                 </motion.div>
@@ -229,10 +246,10 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <h3 className="text-lg font-semibold text-white">Phone</h3>
-                      <a href="https://wa.me/923233541250" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white transition">
+                      <a href="https://wa.me/923233541250" target="_blank" rel="noopener noreferrer" className="text-gray-200 hover:text-white transition">
                         +92 323 3541250
                       </a>
-                      <p className="text-gray-400 text-sm">Available: 24/7</p>
+                      <p className="text-gray-300 text-sm">Available: 24/7</p>
                     </div>
                   </div>
 
@@ -254,10 +271,10 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <h3 className="text-lg font-semibold text-white">Email</h3>
-                      <a href="mailto:harisanwarali@gmail.com" className="text-gray-300 hover:text-white transition">
+                      <a href="mailto:harisanwarali@gmail.com" className="text-gray-200 hover:text-white transition">
                         harisanwarali@gmail.com
                       </a>
-                      <p className="text-gray-400 text-sm">Response within 24 hours</p>
+                      <p className="text-gray-300 text-sm">Response within 24 hours</p>
                     </div>
                   </div>
 
@@ -285,8 +302,8 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <h3 className="text-lg font-semibold text-white">Location</h3>
-                      <p className="text-gray-300">Pakistan</p>
-                      <p className="text-gray-400 text-sm">Serving residential and commercial clients</p>
+                      <p className="text-gray-200">Pakistan</p>
+                      <p className="text-gray-300 text-sm">Serving residential and commercial clients</p>
                     </div>
                   </div>
                 </motion.div>
@@ -319,7 +336,7 @@ export default function ContactPage() {
                 whileInView="visible"
                 viewport={{ once: true, margin: "-100px" }}
                 variants={formContainerVariants}
-                className="bg-white/10 backdrop-blur-md p-8 rounded-2xl shadow-2xl border border-white/20"
+                className="bg-white/15 backdrop-blur-md p-6 sm:p-8 rounded-2xl shadow-2xl border border-white/20"
               >
                 <h2 className="text-2xl font-bold text-white mb-6">Send us a message</h2>
 
@@ -345,8 +362,8 @@ export default function ContactPage() {
                       </svg>
                     </div>
                     <h3 className="text-xl font-semibold text-white mb-2">Message Sent!</h3>
-                    <p className="text-gray-300 mb-6">
-                      Thank you for contacting us. We'll get back to you within 24 hours.
+                    <p className="text-gray-200 mb-6">
+                      Thank you for contacting us. We&apos;ll get back to you within 24 hours.
                     </p>
                     <button
                       onClick={() => setFormStatus("idle")}
@@ -356,10 +373,15 @@ export default function ContactPage() {
                     </button>
                   </motion.div>
                 ) : (
-                  <form onSubmit={handleSubmit} className="space-y-6">
+                  <form onSubmit={handleSubmit} className="space-y-6 relative">
+                    {/* Honeypot — hidden from real users, visible to bots */}
+                    <div className="absolute opacity-0 pointer-events-none" aria-hidden="true">
+                      <input type="text" name="_hp" value={formData._hp} onChange={handleChange} tabIndex={-1} autoComplete="off" />
+                    </div>
+
                     {/* Name Field */}
                     <motion.div variants={inputFieldVariants}>
-                      <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
+                      <label htmlFor="name" className="block text-sm font-medium text-gray-200 mb-2">
                         Full Name *
                       </label>
                       <input
@@ -370,7 +392,7 @@ export default function ContactPage() {
                         onChange={handleChange}
                         className={`w-full px-4 py-3 bg-white/10 border ${
                           errors.name ? "border-red-500" : "border-white/20"
-                        } rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300`}
+                        } rounded-lg text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300`}
                         placeholder="Enter your full name"
                       />
                       {errors.name && (
@@ -380,7 +402,7 @@ export default function ContactPage() {
 
                     {/* Email Field */}
                     <motion.div variants={inputFieldVariants}>
-                      <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
+                      <label htmlFor="email" className="block text-sm font-medium text-gray-200 mb-2">
                         Email Address *
                       </label>
                       <input
@@ -391,7 +413,7 @@ export default function ContactPage() {
                         onChange={handleChange}
                         className={`w-full px-4 py-3 bg-white/10 border ${
                           errors.email ? "border-red-500" : "border-white/20"
-                        } rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300`}
+                        } rounded-lg text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300`}
                         placeholder="Enter your email address"
                       />
                       {errors.email && (
@@ -401,7 +423,7 @@ export default function ContactPage() {
 
                     {/* Phone Field */}
                     <motion.div variants={inputFieldVariants}>
-                      <label htmlFor="phone" className="block text-sm font-medium text-gray-300 mb-2">
+                      <label htmlFor="phone" className="block text-sm font-medium text-gray-200 mb-2">
                         Phone Number *
                       </label>
                       <input
@@ -412,7 +434,7 @@ export default function ContactPage() {
                         onChange={handleChange}
                         className={`w-full px-4 py-3 bg-white/10 border ${
                           errors.phone ? "border-red-500" : "border-white/20"
-                        } rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300`}
+                        } rounded-lg text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300`}
                         placeholder="Enter your phone number"
                       />
                       {errors.phone && (
@@ -422,7 +444,7 @@ export default function ContactPage() {
 
                     {/* Message Field */}
                     <motion.div variants={inputFieldVariants}>
-                      <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
+                      <label htmlFor="message" className="block text-sm font-medium text-gray-200 mb-2">
                         Message *
                       </label>
                       <textarea
@@ -433,7 +455,7 @@ export default function ContactPage() {
                         rows={5}
                         className={`w-full px-4 py-3 bg-white/10 border ${
                           errors.message ? "border-red-500" : "border-white/20"
-                        } rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 resize-none`}
+                        } rounded-lg text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 resize-none`}
                         placeholder="Tell us about your project or inquiry..."
                       ></textarea>
                       {errors.message && (
@@ -464,7 +486,7 @@ export default function ContactPage() {
                         className="text-center"
                       >
                         <p className="text-red-400">
-                          There was an error sending your message. Please try again or contact us directly.
+                          {errorMsg || "There was an error sending your message. Please try again or contact us directly."}
                         </p>
                       </motion.div>
                     )}
@@ -473,6 +495,7 @@ export default function ContactPage() {
               </motion.div>
             </div>
           </div>
+          <FAQSection />
         </main>
 
         <Footer />

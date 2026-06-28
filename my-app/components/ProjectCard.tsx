@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { useState } from 'react';
 
 interface Project {
   id: string;
@@ -18,8 +17,6 @@ interface ProjectCardProps {
 }
 
 const ProjectCard = ({ project, index }: ProjectCardProps) => {
-  const [isHovered, setIsHovered] = useState(false);
-
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
@@ -45,16 +42,15 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
 
   return (
     <motion.div
-      className="group overflow-hidden rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 shadow-xl hover:shadow-2xl transition-shadow duration-300"
+      className="group overflow-hidden rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 shadow-xl hover:shadow-2xl transition-shadow duration-300 h-full"
       variants={itemVariants}
       initial="hidden"
       whileInView="visible"
       whileHover="hover"
       viewport={{ once: true, margin: '-100px' }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+
     >
-      <div className="relative h-[280px] sm:h-[320px] lg:h-[340px] overflow-hidden">
+      <div className="relative h-[200px] sm:h-[280px] lg:h-[340px] overflow-hidden">
         <motion.div variants={imageVariants}
           className="absolute inset-0">
           <Image
@@ -73,9 +69,9 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
         </div>
       </div>
 
-      <div className="p-6 bg-white/5 backdrop-blur-sm">
-        <h3 className="text-xl font-bold text-white mb-2">{project.title}</h3>
-        <p className="text-gray-200 leading-relaxed">{project.description}</p>
+      <div className="p-4 sm:p-6 bg-white/5 backdrop-blur-sm">
+        <h3 className="text-lg sm:text-xl font-bold text-white mb-1.5 sm:mb-2">{project.title}</h3>
+        <p className="text-gray-200 text-sm sm:text-base leading-relaxed line-clamp-3">{project.description}</p>
       </div>
     </motion.div>
   );
