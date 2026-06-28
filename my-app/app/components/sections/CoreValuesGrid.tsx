@@ -4,7 +4,6 @@ import { motion } from "framer-motion"
 import type { Variants } from "framer-motion"
 import { MdBuild, MdPalette, MdConstruction } from "react-icons/md"
 
-// Animation Variants (matching About page patterns)
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
@@ -26,7 +25,6 @@ const itemVariants: Variants = {
 }
 
 export default function CoreValuesGrid() {
-  // Select top 3 values for landing page (vs 6 on About page)
   const values = [
     {
       icon: MdBuild,
@@ -51,7 +49,6 @@ export default function CoreValuesGrid() {
   return (
     <section className="py-20 sm:py-32 px-4 sm:px-6 lg:px-8 bg-transparent">
       <div className="max-w-6xl mx-auto">
-        {/* Section Header */}
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -67,8 +64,8 @@ export default function CoreValuesGrid() {
           </motion.h2>
           <motion.div
             variants={itemVariants}
-            className="w-16 h-1 bg-gradient-to-r from-blue-600 to-slate-700 mx-auto mb-6"
-          ></motion.div>
+            className="w-16 h-1 bg-gradient-to-r from-blue-500 to-cyan-400 mx-auto mb-6"
+          />
           <motion.p
             variants={itemVariants}
             className="text-lg text-gray-300 max-w-2xl mx-auto"
@@ -78,7 +75,6 @@ export default function CoreValuesGrid() {
           </motion.p>
         </motion.div>
 
-        {/* Values Grid - matching About page glass card style */}
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -92,15 +88,15 @@ export default function CoreValuesGrid() {
               <motion.div
                 key={index}
                 variants={itemVariants}
-                className="bg-white/10 backdrop-blur-md p-6 sm:p-8 rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 border border-white/20 hover:border-white/30 hover:bg-white/15 hover:scale-105 h-full"
+                className="bg-gray-800/60 backdrop-blur-sm p-6 sm:p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-700/50 hover:border-blue-500/30 hover:bg-gray-700/60 h-full group"
               >
-                <div className="text-4xl sm:text-5xl mb-4 transition-transform duration-300 text-blue-400">
+                <div className="text-4xl sm:text-5xl mb-4 text-blue-400 group-hover:text-blue-300 transition-colors">
                   <IconComponent />
                 </div>
                 <h3 className="text-xl font-bold text-white mb-3">
                   {value.title}
                 </h3>
-                <p className="text-gray-200 leading-relaxed">{value.description}</p>
+                <p className="text-gray-300 leading-relaxed">{value.description}</p>
               </motion.div>
             )
           })}

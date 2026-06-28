@@ -53,17 +53,17 @@ export default function RecentProjects({
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={containerVariants}
-          className="text-center mb-20 px-6"
+          className="text-center mb-16"
         >
           <motion.h2
             variants={itemVariants}
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6"
+            className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4"
           >
             {title}
           </motion.h2>
           <motion.p
             variants={itemVariants}
-            className="text-lg text-gray-200 max-w-3xl mx-auto"
+            className="text-lg text-gray-300 max-w-3xl mx-auto"
           >
             {subtitle}
           </motion.p>
@@ -101,9 +101,10 @@ export default function RecentProjects({
           <div className="text-center">
             <Link
               href="/projects"
-              className="inline-flex items-center text-blue-400 font-semibold hover:text-blue-300 transition-colors"
+              className="inline-flex items-center gap-2 text-blue-400 font-semibold hover:text-blue-300 transition-colors group"
             >
-              View All Projects →
+              View All Projects
+              <span className="group-hover:translate-x-1 transition-transform">→</span>
             </Link>
           </div>
         )}

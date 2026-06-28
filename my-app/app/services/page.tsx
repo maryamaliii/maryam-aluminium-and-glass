@@ -86,13 +86,13 @@ export default function ServicesPage() {
           >
             <motion.h1
               variants={item}
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6"
+              className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6"
             >
-              Our <span className="bg-gradient-to-r from-blue-600 to-slate-700 bg-clip-text text-transparent">Services</span>
+              Our <span className="bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">Services</span>
             </motion.h1>
             <motion.p
               variants={item}
-              className="text-base sm:text-lg text-white/80 max-w-2xl sm:max-w-3xl mx-auto px-2"
+              className="text-base sm:text-lg text-gray-300 max-w-3xl mx-auto"
             >
               Comprehensive aluminium and glass solutions crafted with precision,
               experience, and modern design standards.

@@ -71,17 +71,17 @@ export default function ProjectsPage() {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={containerVariants}
-            className="text-center mb-20 px-6"
+            className="text-center mb-16 px-6"
           >
             <motion.h1
               variants={itemVariants}
-              className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6"
+              className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6"
             >
-              Our <span className="bg-gradient-to-r from-blue-600 to-slate-700 bg-clip-text text-transparent">Projects</span>
+              Our <span className="bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">Projects</span>
             </motion.h1>
             <motion.p
               variants={itemVariants}
-              className="text-base sm:text-lg text-white/80 max-w-3xl mx-auto px-2 sm:px-0"
+              className="text-base sm:text-lg text-gray-300 max-w-3xl mx-auto"
             >
               Discover our portfolio of premium aluminium and glass solutions crafted with precision and attention to detail.
             </motion.p>
@@ -94,15 +94,14 @@ export default function ProjectsPage() {
               </div>
             ) : (
               <>
-                {/* Filter Buttons */}
                 {services.length > 0 && (
                   <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-10 sm:mb-12">
                     <button
                       onClick={() => setActiveFilter("")}
-                      className={`px-4 sm:px-5 py-2.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 ${
+                      className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
                         activeFilter === ""
-                          ? "bg-blue-600 text-white shadow-lg"
-                          : "bg-white/10 text-gray-200 border border-white/20 hover:bg-white/20"
+                          ? "bg-blue-600 text-white shadow-lg shadow-blue-600/20"
+                          : "bg-gray-800/60 text-gray-300 border border-gray-700/50 hover:bg-gray-700/60 hover:text-white"
                       }`}
                     >
                       All
@@ -111,10 +110,10 @@ export default function ProjectsPage() {
                       <button
                         key={s.id}
                         onClick={() => setActiveFilter(s.slug)}
-                        className={`px-4 sm:px-5 py-2.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 ${
+                        className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
                           activeFilter === s.slug
-                            ? "bg-blue-600 text-white shadow-lg"
-                            : "bg-white/10 text-gray-200 border border-white/20 hover:bg-white/20"
+                            ? "bg-blue-600 text-white shadow-lg shadow-blue-600/20"
+                            : "bg-gray-800/60 text-gray-300 border border-gray-700/50 hover:bg-gray-700/60 hover:text-white"
                         }`}
                       >
                         {s.title}
@@ -123,7 +122,6 @@ export default function ProjectsPage() {
                   </div>
                 )}
 
-                {/* No results */}
                 {filteredProjects.length === 0 ? (
                   <div className="text-center py-20">
                     <p className="text-gray-400 text-lg">No projects found in this category.</p>

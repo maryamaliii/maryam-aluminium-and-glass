@@ -9,6 +9,7 @@ const nextConfig: NextConfig = {
         hostname: "res.cloudinary.com",
       },
     ],
+    deviceSizes: [320, 375, 390, 414, 768, 1024, 1440],
   },
 };
 

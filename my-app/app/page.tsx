@@ -1,12 +1,10 @@
 "use client"
 
-import { useState, useEffect, useSyncExternalStore } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
-import { Montserrat } from "next/font/google"
 import { motion } from "framer-motion"
 import type { Variants } from "framer-motion"
-import { usePathname } from "next/navigation"
-import Logo from "@/app/components/Logo"
+import Header from "@/app/components/Header"
 import Footer from "@/app/components/Footer"
 import CompanyStory from "@/app/components/sections/CompanyStory"
 import CoreValuesGrid from "@/app/components/sections/CoreValuesGrid"
@@ -17,8 +15,6 @@ import QuoteRequestForm from "@/components/QuoteRequestForm"
 import ProcessWorkflow from "@/components/ProcessWorkflow"
 import { usePageMetadata } from "@/lib/use-page-metadata"
 import type { ProjectResponse } from "@/types"
-
-const montserrat = Montserrat({ subsets: ["latin"] })
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -35,92 +31,6 @@ const itemVariants: Variants = {
     y: 0,
     transition: { duration: 0.8, delay: 0 },
   },
-}
-
-const headingVariants: Variants = {
-  hidden: { opacity: 0, y: -30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 1, delay: 0 },
-  },
-}
-
-const buttonVariants: Variants = {
-  hidden: { opacity: 0, scale: 0.8 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: { duration: 0.6, delay: 0 },
-  },
-}
-
-const navLinks = [
-  { name: "Home", href: "/" },
-  { name: "About", href: "/about" },
-  { name: "Services", href: "/services" },
-  { name: "Projects", href: "/projects" },
-  { name: "Portfolio", href: "/portfolio" },
-  { name: "Contact", href: "/contact" },
-]
-
-function LandingPageHeader() {
-  const pathname = usePathname()
-  const [isOpen, setIsOpen] = useState(false)
-  const isAdmin = useSyncExternalStore(() => () => {}, () => !!localStorage.getItem("token"), () => false)
-
-  return (
-    <header
-      className="sticky top-0 z-50 bg-transparent shadow-sm"
-      style={{ backdropFilter: "blur(5px)" }}
-    >
-      <div className="relative z-10 mx-auto max-w-7xl flex items-center justify-between px-6 py-4">
-        <Logo />
-
-        <nav className="relative">
-          <button
-            aria-label="Toggle menu"
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden focus:outline-none focus-visible:ring-2 ring-white text-white p-2 rounded-lg hover:bg-white/10 transition-colors"
-          >
-            ☰
-          </button>
-
-          <ul
-            className={`absolute right-0 top-14 w-56 rounded-xl bg-gray-900/95 backdrop-blur-md shadow-xl border border-white/10 transition-all duration-300 py-2
-            md:static md:flex md:w-auto md:shadow-none md:bg-transparent md:border-0 md:py-0
-            ${isOpen ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-2 pointer-events-none md:opacity-100 md:translate-y-0 md:pointer-events-auto"}
-            `}
-          >
-            {navLinks.map(link => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className={`block px-4 py-2.5 mx-2 rounded-lg text-sm transition-colors
-                  ${pathname === link.href ? "text-white font-semibold bg-white/10" : "text-gray-300 hover:text-white hover:bg-white/5"}
-                  `}
-                  onClick={() => setIsOpen(false)}
-                >
-                  {link.name}
-                </Link>
-              </li>
-            ))}
-            {isAdmin && (
-              <li>
-                <Link
-                  href="/admin/dashboard"
-                  className="block px-4 py-2.5 mx-2 rounded-lg text-sm text-blue-300 hover:text-blue-200 hover:bg-white/5 font-medium transition-colors"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Admin
-                </Link>
-              </li>
-            )}
-          </ul>
-        </nav>
-      </div>
-    </header>
-  )
 }
 
 export default function HomePage() {
@@ -161,10 +71,10 @@ export default function HomePage() {
         backgroundPosition: "center",
       }}
     >
-      <div className="fixed inset-0 bg-black/30 pointer-events-none z-0"></div>
+      <div className="fixed inset-0 bg-black/40 pointer-events-none z-0" />
 
       <div className="relative z-10 flex flex-col min-h-screen w-full">
-        <LandingPageHeader />
+        <Header />
 
         <main className="flex-1 flex items-center justify-center px-4 sm:px-6 py-16 sm:py-20">
           <motion.div
@@ -174,20 +84,19 @@ export default function HomePage() {
             animate="visible"
           >
             <motion.h1
-              className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight bg-gradient-to-r from-blue-600 to-slate-700 bg-clip-text text-transparent ${montserrat.className}`}
-              variants={headingVariants}
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight"
+              variants={itemVariants}
             >
-              Meer Engineering
-              <motion.span
-                className="block mt-2 text-xl sm:text-2xl md:text-3xl font-medium text-gray-200"
-                variants={itemVariants}
-              >
+              <span className="bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">
+                Meer Engineering
+              </span>
+              <span className="block mt-3 text-xl sm:text-2xl md:text-3xl font-medium text-gray-200">
                 Where Precision Aluminium Meets Modern Glass Design
-              </motion.span>
+              </span>
             </motion.h1>
 
             <motion.p
-              className="mt-4 sm:mt-5 text-sm sm:text-base md:text-lg text-gray-200"
+              className="mt-6 text-sm sm:text-base md:text-lg text-gray-300 max-w-2xl mx-auto"
               variants={itemVariants}
             >
               We specialize in high-quality aluminium fabrication and modern glass
@@ -196,25 +105,21 @@ export default function HomePage() {
             </motion.p>
 
             <motion.div
-              className="mt-8 flex flex-col sm:flex-row justify-center gap-4 w-full sm:w-auto"
-              variants={containerVariants}
+              className="mt-8 sm:mt-10 flex flex-col sm:flex-row justify-center gap-4"
+              variants={itemVariants}
             >
               <Link
                 href="/contact"
-                className="w-full sm:w-auto rounded-lg bg-white px-6 py-4 text-sm font-semibold text-black hover:bg-gray-200 transition text-center"
+                className="w-full sm:w-auto rounded-lg bg-white px-8 py-4 text-base font-semibold text-gray-900 hover:bg-gray-100 transition text-center shadow-lg hover:shadow-xl"
               >
-                <motion.span variants={buttonVariants} whileHover={{ scale: 1.05 }} className="block">
-                  Get a Quote
-                </motion.span>
+                Get a Free Quote
               </Link>
 
               <Link
                 href="/services"
-                className="w-full sm:w-auto rounded-lg border border-white px-6 py-4 text-sm font-semibold text-white hover:bg-white hover:text-black transition text-center"
+                className="w-full sm:w-auto rounded-lg border-2 border-white/30 px-8 py-4 text-base font-semibold text-white hover:bg-white/10 hover:border-white/50 transition text-center"
               >
-                <motion.span variants={buttonVariants} whileHover={{ scale: 1.05 }} className="block">
-                  Our Services
-                </motion.span>
+                Our Services
               </Link>
             </motion.div>
           </motion.div>
@@ -236,12 +141,13 @@ export default function HomePage() {
 
               <section className="py-8 sm:py-12 bg-transparent">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6">
-                  <div className="pt-2 sm:pt-4 text-center sm:text-left">
+                  <div className="pt-2 sm:pt-4 text-center">
                     <Link
                       href="/projects"
-                      className="inline-flex items-center text-blue-400 font-semibold hover:text-blue-300 transition-colors text-sm sm:text-base"
+                      className="inline-flex items-center gap-2 text-blue-400 font-semibold hover:text-blue-300 transition-colors text-sm sm:text-base group"
                     >
-                      View All Projects →
+                      View All Projects
+                      <span className="group-hover:translate-x-1 transition-transform">→</span>
                     </Link>
                   </div>
                 </div>

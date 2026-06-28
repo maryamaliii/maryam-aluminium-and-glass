@@ -43,7 +43,7 @@ const ProjectsSection = ({
   const displayProjects = limit ? projects.slice(0, limit) : projects;
 
   return (
-    <section className="py-20 bg-transparent">
+    <section className="py-20 sm:py-32 bg-transparent">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
           className="text-center mb-16"
@@ -53,7 +53,7 @@ const ProjectsSection = ({
           variants={headerVariants}
         >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">{title}</h2>
-          <p className="text-base sm:text-lg lg:text-xl text-gray-200 max-w-2xl mx-auto">{subtitle}</p>
+          <p className="text-base sm:text-lg lg:text-xl text-gray-300 max-w-2xl mx-auto">{subtitle}</p>
         </motion.div>
 
         <motion.div
@@ -67,7 +67,6 @@ const ProjectsSection = ({
             <ProjectCard key={project.id} project={project} index={index} />
           ))}
         </motion.div>
-
       </div>
     </section>
   );

@@ -5,7 +5,6 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
-
 interface ServiceCardProps {
   title: string;
   description: string;
@@ -18,16 +17,14 @@ const ServiceCardWithSlider = ({ title, description, icon: Icon, images }: Servi
   const [isHovered, setIsHovered] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Auto-play functionality
   useEffect(() => {
     if (!isHovered && images.length > 1) {
       intervalRef.current = setInterval(() => {
         setCurrentIndex((prevIndex) =>
           prevIndex === images.length - 1 ? 0 : prevIndex + 1
         );
-      }, 4000); // Increased interval for more premium feel
+      }, 4000);
     }
-
     return () => {
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
@@ -35,19 +32,10 @@ const ServiceCardWithSlider = ({ title, description, icon: Icon, images }: Servi
     };
   }, [isHovered, images.length]);
 
-  const goToSlide = (index: number) => {
-    setCurrentIndex(index);
-  };
+  const goToSlide = (index: number) => setCurrentIndex(index);
+  const goToPrev = () => setCurrentIndex(currentIndex === 0 ? images.length - 1 : currentIndex - 1);
+  const goToNext = () => setCurrentIndex(currentIndex === images.length - 1 ? 0 : currentIndex + 1);
 
-  const goToPrev = () => {
-    setCurrentIndex(currentIndex === 0 ? images.length - 1 : currentIndex - 1);
-  };
-
-  const goToNext = () => {
-    setCurrentIndex(currentIndex === images.length - 1 ? 0 : currentIndex + 1);
-  };
-
-  // Preload images to avoid flickering
   useEffect(() => {
     const preloadImages = async () => {
       await Promise.all(
@@ -61,7 +49,6 @@ const ServiceCardWithSlider = ({ title, description, icon: Icon, images }: Servi
         })
       );
     };
-
     if (images.length > 0) {
       preloadImages();
     }
@@ -69,22 +56,14 @@ const ServiceCardWithSlider = ({ title, description, icon: Icon, images }: Servi
 
   return (
     <motion.div
-      className="group bg-white/5 backdrop-blur-xl rounded-3xl overflow-hidden border border-white/10 hover:border-white/20 transition-all duration-500 h-full flex flex-col shadow-xl hover:shadow-2xl hover:shadow-blue-500/10"
+      className="group bg-gray-800/60 backdrop-blur-sm rounded-2xl overflow-hidden border border-gray-700/50 hover:border-blue-500/30 transition-all duration-500 h-full flex flex-col shadow-lg hover:shadow-2xl hover:shadow-blue-500/5"
       initial={{ opacity: 0, y: 40, scale: 0.95 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{
-        duration: 0.8,
-        ease: [0.23, 1, 0.32, 1],
-        scale: {
-          duration: 0.5,
-          ease: [0.23, 1, 0.32, 1]
-        }
-      }}
+      transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
       whileHover={{ y: -6 }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Image Slider Section */}
       <div className="relative w-full h-[200px] sm:h-[260px] lg:h-[340px] overflow-hidden bg-black">
         {images.length > 0 && (
           <>
@@ -98,14 +77,7 @@ const ServiceCardWithSlider = ({ title, description, icon: Icon, images }: Servi
                   scale: index === currentIndex ? 1 : 1.05
                 }}
                 exit={{ opacity: 0, scale: 0.95 }}
-                transition={{
-                  duration: 0.7,
-                  ease: [0.23, 1, 0.32, 1],
-                  scale: {
-                    duration: 0.5,
-                    ease: [0.23, 1, 0.32, 1]
-                  }
-                }}
+                transition={{ duration: 0.7, ease: [0.23, 1, 0.32, 1] }}
               >
                 <motion.div
                   className="relative w-full h-full"
@@ -119,24 +91,16 @@ const ServiceCardWithSlider = ({ title, description, icon: Icon, images }: Servi
                     className="object-cover"
                     priority={index === 0}
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    quality={95}
-                    onLoadingComplete={(img) => {
-                      if (index === 0) {
-                        img.style.transform = 'scale(1)';
-                        img.style.transition = 'transform 0.3s ease';
-                      }
-                    }}
                   />
                 </motion.div>
               </motion.div>
             ))}
 
-            {/* Navigation Arrows — always visible on mobile, hover on desktop */}
             {images.length > 1 && (
               <>
                 <motion.button
                   onClick={goToPrev}
-                  className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-30 bg-white/20 hover:bg-white/30 text-white p-2.5 sm:p-3 rounded-full opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-300 backdrop-blur-md border border-white/20 shadow-lg hover:shadow-xl hover:scale-105"
+                  className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-30 bg-black/40 hover:bg-black/60 text-white p-2.5 sm:p-3 rounded-full opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-300 backdrop-blur-md border border-white/20 shadow-lg"
                   aria-label="Previous image"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
@@ -145,7 +109,7 @@ const ServiceCardWithSlider = ({ title, description, icon: Icon, images }: Servi
                 </motion.button>
                 <motion.button
                   onClick={goToNext}
-                  className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-30 bg-white/20 hover:bg-white/30 text-white p-2.5 sm:p-3 rounded-full opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-300 backdrop-blur-md border border-white/20 shadow-lg hover:shadow-xl hover:scale-105"
+                  className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-30 bg-black/40 hover:bg-black/60 text-white p-2.5 sm:p-3 rounded-full opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-300 backdrop-blur-md border border-white/20 shadow-lg"
                   aria-label="Next image"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
@@ -157,9 +121,8 @@ const ServiceCardWithSlider = ({ title, description, icon: Icon, images }: Servi
           </>
         )}
 
-        {/* Slide Indicators */}
         {images.length > 1 && (
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 flex space-x-1.5 sm:space-x-2 bg-white/20 backdrop-blur-md px-2.5 sm:px-4 py-2 sm:py-2.5 rounded-full border border-white/20 shadow-lg">
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 flex space-x-1.5 sm:space-x-2 bg-black/40 backdrop-blur-md px-2.5 sm:px-4 py-2 sm:py-2.5 rounded-full border border-white/20 shadow-lg">
             {images.map((_, index) => (
               <motion.button
                 key={index}
@@ -184,18 +147,17 @@ const ServiceCardWithSlider = ({ title, description, icon: Icon, images }: Servi
         )}
       </div>
 
-      {/* Content Section */}
-      <div className="p-4 sm:p-6 flex-grow flex flex-col bg-gradient-to-b from-transparent to-white/5">
-        <div className="flex items-start gap-3 sm:space-x-4 mb-3 sm:mb-4">
+      <div className="p-4 sm:p-6 flex-grow flex flex-col">
+        <div className="flex items-start gap-3 mb-3 sm:mb-4">
           <motion.div
-            className="flex-shrink-0 min-w-fit"
+            className="flex-shrink-0"
             whileHover={{ scale: 1.1, rotate: 5 }}
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
           >
-            <Icon className="text-2xl sm:text-4xl text-blue-300 drop-shadow-lg" />
+            <Icon className="text-2xl sm:text-4xl text-blue-400" />
           </motion.div>
           <motion.h3
-            className="text-lg sm:text-xl font-bold text-white leading-tight tracking-wide"
+            className="text-lg sm:text-xl font-bold text-white leading-tight"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2, duration: 0.6 }}
@@ -204,7 +166,7 @@ const ServiceCardWithSlider = ({ title, description, icon: Icon, images }: Servi
           </motion.h3>
         </div>
         <motion.p
-          className="text-white/80 text-sm sm:text-base leading-relaxed flex-grow"
+          className="text-gray-300 text-sm sm:text-base leading-relaxed flex-grow"
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.3, duration: 0.6 }}

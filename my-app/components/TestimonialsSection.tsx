@@ -56,8 +56,8 @@ export default function TestimonialsSection({
           <motion.h2 variants={itemVariants} className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
             {title}
           </motion.h2>
-          <motion.div variants={itemVariants} className="w-16 h-1 bg-gradient-to-r from-blue-600 to-slate-700 mx-auto mb-6" />
-          <motion.p variants={itemVariants} className="text-lg text-gray-200 max-w-2xl mx-auto">
+          <motion.div variants={itemVariants} className="w-16 h-1 bg-gradient-to-r from-blue-500 to-cyan-400 mx-auto mb-6" />
+          <motion.p variants={itemVariants} className="text-lg text-gray-300 max-w-2xl mx-auto">
             {subtitle}
           </motion.p>
         </motion.div>
@@ -78,10 +78,10 @@ export default function TestimonialsSection({
               <motion.div
                 key={t.id}
                 variants={itemVariants}
-                className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 hover:border-white/30 transition-all duration-300 hover:bg-white/15"
+                className="bg-gray-800/60 backdrop-blur-sm rounded-xl p-6 border border-gray-700/50 hover:border-blue-500/30 transition-all duration-300 hover:bg-gray-700/60 hover:shadow-xl"
               >
-                <MdFormatQuote className="text-blue-400 text-2xl sm:text-3xl mb-3 sm:mb-4 opacity-50" />
-                <p className="text-gray-200 text-sm sm:text-base leading-relaxed mb-3 sm:mb-4 line-clamp-4">
+                <MdFormatQuote className="text-blue-400 text-3xl mb-4 opacity-50" />
+                <p className="text-gray-300 text-sm sm:text-base leading-relaxed mb-4 line-clamp-4">
                   {t.content}
                 </p>
                 <div className="flex items-center gap-1 mb-3">

@@ -37,7 +37,7 @@ const itemVariants: Variants = {
 
 export default function ProcessWorkflow() {
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-transparent">
+    <section className="py-20 sm:py-32 px-4 sm:px-6 lg:px-8 bg-transparent">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial="hidden"
@@ -49,8 +49,8 @@ export default function ProcessWorkflow() {
           <motion.h2 variants={itemVariants} className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
             How We Work
           </motion.h2>
-          <motion.div variants={itemVariants} className="w-16 h-1 bg-gradient-to-r from-blue-600 to-slate-700 mx-auto mb-6" />
-          <motion.p variants={itemVariants} className="text-lg text-gray-200 max-w-2xl mx-auto">
+          <motion.div variants={itemVariants} className="w-16 h-1 bg-gradient-to-r from-blue-500 to-cyan-400 mx-auto mb-6" />
+          <motion.p variants={itemVariants} className="text-lg text-gray-300 max-w-2xl mx-auto">
             A transparent, structured approach from consultation to completion.
           </motion.p>
         </motion.div>
@@ -65,14 +65,14 @@ export default function ProcessWorkflow() {
           {steps.map((step, index) => (
             <motion.div key={index} variants={itemVariants} className="relative">
               {index < steps.length - 1 && (
-                <div className="hidden lg:block absolute top-12 left-[calc(100%-0.5rem)] w-[calc(100%-1rem)] h-0.5 bg-gradient-to-r from-blue-500/60 to-transparent" />
+                <div className="hidden lg:block absolute top-12 left-[calc(100%-0.5rem)] w-[calc(100%-1rem)] h-0.5 bg-gradient-to-r from-blue-500/40 to-transparent" />
               )}
-              <div className="bg-white/10 backdrop-blur-md rounded-xl p-5 sm:p-6 border border-white/20 hover:border-white/40 transition-all duration-300 h-full hover:bg-white/20 hover:shadow-lg hover:scale-[1.02]">
-                <div className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent mb-2 sm:mb-3">
+              <div className="bg-gray-800/60 backdrop-blur-sm rounded-xl p-5 sm:p-6 border border-gray-700/50 hover:border-blue-500/30 transition-all duration-300 h-full hover:bg-gray-700/60 hover:shadow-xl group">
+                <div className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent mb-3">
                   {step.number}
                 </div>
-                <h3 className="text-base sm:text-lg font-bold text-white mb-1.5 sm:mb-2">{step.title}</h3>
-                <p className="text-gray-300 text-xs sm:text-sm leading-relaxed">{step.description}</p>
+                <h3 className="text-lg font-bold text-white mb-2">{step.title}</h3>
+                <p className="text-gray-300 text-sm leading-relaxed">{step.description}</p>
               </div>
             </motion.div>
           ))}

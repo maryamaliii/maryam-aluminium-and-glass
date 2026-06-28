@@ -7,12 +7,9 @@ import Link from "next/link"
 import Header from "@/app/components/Header"
 import Footer from "@/app/components/Footer"
 import RecentProjects from "@/app/components/RecentProjects"
+import TrustMetrics from "@/app/components/sections/TrustMetrics"
 import { usePageMetadata } from "@/lib/use-page-metadata"
 import { MdBuild, MdPalette, MdConstruction, MdHandshake, MdShoppingCart, MdRocketLaunch } from "react-icons/md"
-
-// ============================================================================
-// Animation Variants
-// ============================================================================
 
 const fadeInVariants: Variants = {
   hidden: { opacity: 0 },
@@ -69,16 +66,11 @@ const itemVariants: Variants = {
   },
 }
 
-// ============================================================================
-// Hero Section Component
-// ============================================================================
-
 function HeroSection() {
   return (
-    <section className="relative min-h-screen bg-transparent flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 overflow-hidden">
-      {/* Background Accent Elements */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-slate-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
+    <section className="relative min-h-[80vh] bg-transparent flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 overflow-hidden">
+      <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-slate-500/10 rounded-full blur-3xl" />
 
       <motion.div
         className="relative z-10 max-w-4xl mx-auto text-center"
@@ -88,17 +80,17 @@ function HeroSection() {
       >
         <motion.h1
           variants={slideInLeftVariants}
-          className="text-4xl sm:text-5xl lg:text-7xl font-bold mb-4 sm:mb-6 tracking-tight text-white"
+          className="text-4xl sm:text-5xl lg:text-7xl font-bold mb-6 tracking-tight text-white"
         >
           About{" "}
-          <span className="bg-gradient-to-r from-blue-600 to-slate-700 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">
             Meer Engineering
           </span>
         </motion.h1>
 
         <motion.p
           variants={slideInRightVariants}
-          className="text-lg sm:text-xl lg:text-2xl text-gray-200 mb-6 sm:mb-8 leading-relaxed px-2 sm:px-0"
+          className="text-lg sm:text-xl lg:text-2xl text-gray-300 mb-8 leading-relaxed"
         >
           A decade of excellence in aluminium fabrication and glass innovation,
           crafted with precision and delivered with integrity.
@@ -106,17 +98,17 @@ function HeroSection() {
 
         <motion.div
           variants={fadeInVariants}
-          className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4 sm:px-0"
+          className="flex flex-col sm:flex-row gap-4 justify-center"
         >
           <Link
             href="/contact"
-            className="w-full sm:w-auto text-center px-8 py-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-300"
+            className="w-full sm:w-auto text-center px-8 py-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-300 shadow-lg"
           >
             Get in Touch
           </Link>
           <Link
             href="#journey"
-            className="w-full sm:w-auto text-center px-8 py-4 border-2 border-white/30 text-white font-semibold rounded-lg hover:border-white/60 hover:bg-white/10 transition-colors duration-300"
+            className="w-full sm:w-auto text-center px-8 py-4 border-2 border-white/20 text-white font-semibold rounded-lg hover:border-white/40 hover:bg-white/5 transition-colors duration-300"
           >
             Learn Our Story
           </Link>
@@ -126,52 +118,40 @@ function HeroSection() {
   )
 }
 
-// ============================================================================
-// Company Story Section
-// ============================================================================
-
 function StorySection() {
   return (
-    <section
-      id="journey"
-      className="py-20 sm:py-32 px-4 sm:px-6 lg:px-8 bg-transparent"
-    >
+    <section id="journey" className="py-20 sm:py-32 px-4 sm:px-6 lg:px-8 bg-transparent">
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Left: Content */}
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={slideInLeftVariants}
-            className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 sm:p-8"
+            className="bg-gray-800/60 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-gray-700/50"
           >
             <div className="space-y-6">
               <div>
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-3 sm:mb-4">
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
                   A Foundation Built on Quality
                 </h2>
-                <div className="w-16 h-1 bg-gradient-to-r from-blue-600 to-slate-700"></div>
+                <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-cyan-400" />
               </div>
 
-              <p className="text-base sm:text-lg text-slate-700 leading-relaxed">
+              <p className="text-base sm:text-lg text-gray-300 leading-relaxed">
                 With over a decade in the aluminium and glass industry, Meer Engineering
                 has evolved from a passionate startup into a trusted partner for
-                residential and commercial projects across the region. We began
-                with a simple belief: premium materials and skilled craftsmanship
-                create lasting solutions.
+                residential and commercial projects across the region.
               </p>
 
-              <p className="text-base sm:text-lg text-slate-700 leading-relaxed">
+              <p className="text-base sm:text-lg text-gray-300 leading-relaxed">
                 Today, we blend traditional precision metalworking with modern
                 design sensibilities. Every project we undertake reflects our
                 commitment to excellence—from initial consultation through final
-                installation. We don&apos;t just build windows and glass structures;
-                we craft architectural solutions that enhance spaces and stand
-                the test of time.
+                installation.
               </p>
 
-              <p className="text-base sm:text-lg text-slate-700 leading-relaxed">
+              <p className="text-base sm:text-lg text-gray-300 leading-relaxed">
                 Our team consists of experienced craftsmen and designers who
                 understand that aluminium and glass are not merely materials—they
                 are mediums for creating beauty, light, and functionality.
@@ -180,15 +160,15 @@ function StorySection() {
               <div className="pt-4">
                 <Link
                   href="#expertise"
-                  className="inline-flex items-center text-blue-600 font-semibold hover:text-blue-700 transition-colors"
+                  className="inline-flex items-center gap-2 text-blue-400 font-semibold hover:text-blue-300 transition-colors"
                 >
-                  Discover Our Expertise →
+                  Discover Our Expertise
+                  <span className="group-hover:translate-x-1 transition-transform">→</span>
                 </Link>
               </div>
             </div>
           </motion.div>
 
-          {/* Right: Image Block */}
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -196,45 +176,19 @@ function StorySection() {
             variants={scaleInVariants}
             className="relative h-64 sm:h-80 lg:h-[500px] rounded-2xl overflow-hidden shadow-2xl"
           >
-            {/* Placeholder for company/workspace image */}
-            <div className="w-full h-full bg-gradient-to-br from-slate-300 to-slate-400 flex items-center justify-center">
-              <div className="text-center text-white">
-                <svg
-                  className="w-24 h-24 mx-auto mb-4 opacity-50"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={1.5}
-                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                  />
-                </svg>
-                <p className="text-lg font-semibold">Workspace/Team Image</p>
-                <p className="text-sm mt-2 opacity-75">
-                  Replace with: /images/about-workspace.jpg
-                </p>
-              </div>
-            </div>
             <Image
               src="/images/about-workspace.jpg"
               alt="Meer Engineering workspace"
               fill
               className="object-cover"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 50vw"
             />
-            
           </motion.div>
         </div>
       </div>
     </section>
   )
 }
-
-// ============================================================================
-// Core Values Section
-// ============================================================================
 
 function ValuesSection() {
   const values = [
@@ -277,10 +231,7 @@ function ValuesSection() {
   ]
 
   return (
-    <section
-      id="values"
-      className="py-20 sm:py-32 px-4 sm:px-6 lg:px-8 bg-transparent"
-    >
+    <section id="values" className="py-20 sm:py-32 px-4 sm:px-6 lg:px-8 bg-transparent">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial="hidden"
@@ -289,11 +240,11 @@ function ValuesSection() {
           variants={containerVariants}
           className="text-center mb-16"
         >
-          <motion.h2 variants={itemVariants} className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
+          <motion.h2 variants={itemVariants} className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
             Our Core Values
           </motion.h2>
-          <motion.div variants={itemVariants} className="w-16 h-1 bg-gradient-to-r from-blue-600 to-slate-700 mx-auto mb-6"></motion.div>
-          <motion.p variants={itemVariants} className="text-lg text-slate-600 max-w-2xl mx-auto">
+          <motion.div variants={itemVariants} className="w-16 h-1 bg-gradient-to-r from-blue-500 to-cyan-400 mx-auto mb-6" />
+          <motion.p variants={itemVariants} className="text-lg text-gray-300 max-w-2xl mx-auto">
             These principles guide every decision we make, from material selection
             to customer relationships.
           </motion.p>
@@ -312,15 +263,15 @@ function ValuesSection() {
               <motion.div
                 key={index}
                 variants={itemVariants}
-                className="bg-white/10 backdrop-blur-md p-6 sm:p-8 rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 border border-white/20 hover:border-white/40 hover:bg-white/20 hover:scale-105 h-full"
+                className="bg-gray-800/60 backdrop-blur-sm p-6 sm:p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-700/50 hover:border-blue-500/30 hover:bg-gray-700/60 h-full group"
               >
-                <div className="text-4xl sm:text-5xl mb-4 transition-transform duration-300 text-blue-400">
+                <div className="text-4xl sm:text-5xl mb-4 text-blue-400 group-hover:text-blue-300 transition-colors">
                   <IconComponent />
                 </div>
                 <h3 className="text-xl font-bold text-white mb-3">
                   {value.title}
                 </h3>
-                <p className="text-white/80 leading-relaxed">{value.description}</p>
+                <p className="text-gray-300 leading-relaxed">{value.description}</p>
               </motion.div>
             )
           })}
@@ -330,143 +281,61 @@ function ValuesSection() {
   )
 }
 
-// ============================================================================
-// Expertise & Services Section
-// ============================================================================
-
 function ExpertiseSection() {
   return (
-    <section
-      id="expertise"
-      className="py-20 sm:py-32 px-4 sm:px-6 lg:px-8 bg-transparent"
-    >
+    <section id="expertise" className="py-20 sm:py-32 px-4 sm:px-6 lg:px-8 bg-transparent">
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Left: Image Block */}
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={scaleInVariants}
-            className="relative h-96 sm:h-[500px] rounded-2xl overflow-hidden shadow-2xl order-2 lg:order-1"
+            className="relative h-80 sm:h-[500px] rounded-2xl overflow-hidden shadow-2xl order-2 lg:order-1"
           >
-            {/* Placeholder for product/installation image */}
-            <div className="w-full h-full bg-gradient-to-br from-blue-300 to-slate-500 flex items-center justify-center">
-              <div className="text-center text-white">
-                <svg
-                  className="w-24 h-24 mx-auto mb-4 opacity-50"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={1.5}
-                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                  />
-                </svg>
-                <p className="text-lg font-semibold">Installation/Product Image</p>
-                <p className="text-sm mt-2 opacity-75">
-                  Replace with: /images/about-installation.jpg
-                </p>
-              </div>
-            </div>
-      
             <Image
               src="/images/about-installation.jpg"
               alt="Professional aluminium and glass installation"
               fill
               className="object-cover"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 50vw"
             />
-          
           </motion.div>
 
-          {/* Right: Content */}
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={slideInRightVariants}
-            className="order-1 lg:order-2 bg-white/60 backdrop-blur-sm rounded-2xl p-6 sm:p-8"
+            className="order-1 lg:order-2 bg-gray-800/60 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-gray-700/50"
           >
             <div className="space-y-6">
               <div>
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
                   Our Expertise in Action
                 </h2>
-                <div className="w-16 h-1 bg-gradient-to-r from-blue-600 to-slate-700"></div>
+                <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-cyan-400" />
               </div>
 
-              <div className="space-y-4">
-                <div className="flex gap-4">
-                  <div className="flex-shrink-0">
-                    <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-blue-100 text-blue-600 font-bold">
-                      ✓
+              <div className="space-y-6">
+                {[
+                  { title: "Residential Solutions", desc: "Custom windows, doors, and glass partitions that elevate home aesthetics while ensuring energy efficiency and security." },
+                  { title: "Commercial Projects", desc: "Large-scale installations for offices, retail spaces, and industrial facilities with rigorous structural standards." },
+                  { title: "Design Consultation", desc: "Our designers work collaboratively to translate your vision into functional, beautiful architectural elements." },
+                  { title: "Maintenance & Support", desc: "Ongoing maintenance services ensure your installations remain pristine and functionally optimal for years." },
+                ].map((item, i) => (
+                  <div key={i} className="flex gap-4">
+                    <div className="flex-shrink-0">
+                      <div className="flex items-center justify-center h-10 w-10 rounded-lg bg-blue-600/20 text-blue-400 font-bold">
+                        ✓
+                      </div>
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-semibold text-white mb-1">{item.title}</h3>
+                      <p className="text-gray-300">{item.desc}</p>
                     </div>
                   </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-slate-900 mb-1">
-                      Residential Solutions
-                    </h3>
-                    <p className="text-slate-700">
-                      Custom windows, doors, and glass partitions that elevate
-                      home aesthetics while ensuring energy efficiency and
-                      security.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex gap-4">
-                  <div className="flex-shrink-0">
-                    <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-blue-100 text-blue-600 font-bold">
-                      ✓
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-slate-900 mb-1">
-                      Commercial Projects
-                    </h3>
-                    <p className="text-slate-700">
-                      Large-scale installations for offices, retail spaces, and
-                      industrial facilities with rigorous structural standards.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex gap-4">
-                  <div className="flex-shrink-0">
-                    <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-blue-100 text-blue-600 font-bold">
-                      ✓
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-slate-900 mb-1">
-                      Design Consultation
-                    </h3>
-                    <p className="text-slate-700">
-                      Our designers work collaboratively to translate your vision
-                      into functional, beautiful architectural elements.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex gap-4">
-                  <div className="flex-shrink-0">
-                    <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-blue-100 text-blue-600 font-bold">
-                      ✓
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-slate-900 mb-1">
-                      Maintenance & Support
-                    </h3>
-                    <p className="text-slate-700">
-                      Ongoing maintenance services ensure your installations
-                      remain pristine and functionally optimal for years.
-                    </p>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
           </motion.div>
@@ -475,10 +344,6 @@ function ExpertiseSection() {
     </section>
   )
 }
-
-// ============================================================================
-// Process Section
-// ============================================================================
 
 function ProcessSection() {
   const steps = [
@@ -509,10 +374,7 @@ function ProcessSection() {
   ]
 
   return (
-    <section
-      id="process"
-      className="py-20 sm:py-32 px-4 sm:px-6 lg:px-8 bg-transparent"
-    >
+    <section id="process" className="py-20 sm:py-32 px-4 sm:px-6 lg:px-8 bg-transparent">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial="hidden"
@@ -521,11 +383,11 @@ function ProcessSection() {
           variants={containerVariants}
           className="text-center mb-16"
         >
-          <motion.h2 variants={itemVariants} className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
+          <motion.h2 variants={itemVariants} className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
             Our Process
           </motion.h2>
-          <motion.div variants={itemVariants} className="w-16 h-1 bg-gradient-to-r from-blue-600 to-slate-700 mx-auto mb-6"></motion.div>
-          <motion.p variants={itemVariants} className="text-lg text-slate-600 max-w-2xl mx-auto">
+          <motion.div variants={itemVariants} className="w-16 h-1 bg-gradient-to-r from-blue-500 to-cyan-400 mx-auto mb-6" />
+          <motion.p variants={itemVariants} className="text-lg text-gray-300 max-w-2xl mx-auto">
             A structured approach ensuring transparency and excellence at every stage.
           </motion.p>
         </motion.div>
@@ -539,19 +401,17 @@ function ProcessSection() {
         >
           {steps.map((step, index) => (
             <motion.div key={index} variants={itemVariants} className="relative">
-              {/* Connection Line (hidden on mobile) */}
               {index < steps.length - 1 && (
-                <div className="hidden lg:block absolute top-20 left-[calc(100%+1rem)] w-[calc(100%-2rem)] h-1 bg-gradient-to-r from-blue-300 to-transparent"></div>
+                <div className="hidden lg:block absolute top-16 left-[calc(100%+1rem)] w-[calc(100%-2rem)] h-0.5 bg-gradient-to-r from-blue-500/40 to-transparent" />
               )}
-
-              <div className="bg-white/10 backdrop-blur-md p-6 rounded-xl border-2 border-white/20 hover:border-white/40 transition-all duration-300 h-full hover:bg-white/20 hover:shadow-lg hover:scale-105">
+              <div className="bg-gray-800/60 backdrop-blur-sm p-6 rounded-xl border border-gray-700/50 hover:border-blue-500/30 transition-all duration-300 h-full hover:bg-gray-700/60 hover:shadow-xl group">
                 <div className="text-4xl font-bold bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent mb-4">
                   {step.number}
                 </div>
                 <h3 className="text-xl font-bold text-white mb-3">
                   {step.title}
                 </h3>
-                <p className="text-white/80 leading-relaxed">
+                <p className="text-gray-300 leading-relaxed">
                   {step.description}
                 </p>
               </div>
@@ -562,10 +422,6 @@ function ProcessSection() {
     </section>
   )
 }
-
-// ============================================================================
-// Recent Projects Section
-// ============================================================================
 
 function RecentProjectsSection() {
   return (
@@ -578,64 +434,6 @@ function RecentProjectsSection() {
   );
 }
 
-// ============================================================================
-// Testimonial/Trust Section
-// ============================================================================
-
-function TrustSection() {
-  const stats = [
-    { number: "10+", label: "Years of Experience" },
-    { number: "500+", label: "Projects Completed" },
-    { number: "98%", label: "Customer Satisfaction" },
-    { number: "24/7", label: "Customer Support" },
-  ]
-
-  return (
-    <section className="py-20 sm:py-32 px-4 sm:px-6 lg:px-8 bg-transparent text-white">
-      <div className="max-w-6xl mx-auto">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={containerVariants}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
-        >
-          {stats.map((stat, index) => (
-            <motion.div
-              key={index}
-              variants={itemVariants}
-              className="text-center p-6 bg-white/10 rounded-xl backdrop-blur-md border border-white/20 hover:border-white/40 transition-all duration-300 hover:bg-white/20 hover:shadow-lg hover:scale-105"
-            >
-              <div className="text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent mb-2">
-                {stat.number}
-              </div>
-              <p className="text-base sm:text-lg text-white/80">{stat.label}</p>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={fadeInVariants}
-          className="mt-16 text-center"
-        >
-          <p className="text-xl text-white/90 mb-8 max-w-3xl mx-auto leading-relaxed">
-            Over a decade of consistent delivery has earned us the trust of
-            hundreds of satisfied clients. We&apos;re not just a service provider&mdash;we&apos;re
-            a partner invested in your project&apos;s success.
-          </p>
-        </motion.div>
-      </div>
-    </section>
-  )
-}
-
-// ============================================================================
-// CTA Section
-// ============================================================================
-
 function CTASection() {
   return (
     <section className="py-20 sm:py-32 px-4 sm:px-6 lg:px-8 bg-transparent">
@@ -644,37 +442,37 @@ function CTASection() {
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={containerVariants}
-        className="max-w-4xl mx-auto text-center bg-white/60 backdrop-blur-sm rounded-2xl p-6 sm:p-12"
+        className="max-w-4xl mx-auto text-center bg-gray-800/60 backdrop-blur-sm rounded-2xl p-6 sm:p-12 border border-gray-700/50"
       >
         <motion.h2
           variants={itemVariants}
-          className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 sm:mb-6"
+          className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6"
         >
           Ready to Transform Your Space?
         </motion.h2>
 
         <motion.p
           variants={itemVariants}
-          className="text-base sm:text-lg lg:text-xl text-slate-600 mb-6 sm:mb-8 leading-relaxed"
+          className="text-base sm:text-lg lg:text-xl text-gray-300 mb-8 leading-relaxed"
         >
-           Let&apos;s discuss your project. Contact our team today for a free
+          Let&apos;s discuss your project. Contact our team today for a free
           consultation and discover how Meer Engineering can bring your
           vision to life.
         </motion.p>
 
         <motion.div
           variants={itemVariants}
-          className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center"
+          className="flex flex-col sm:flex-row gap-4 justify-center"
         >
           <Link
             href="/contact"
-            className="w-full sm:w-auto text-center px-6 sm:px-8 py-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-300"
+            className="w-full sm:w-auto text-center px-8 py-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-300 shadow-lg"
           >
             Start Your Project
           </Link>
           <Link
             href="/portfolio"
-            className="w-full sm:w-auto text-center px-6 sm:px-8 py-4 border-2 border-slate-300 text-slate-900 font-semibold rounded-lg hover:border-slate-400 hover:bg-slate-50 transition-colors duration-300"
+            className="w-full sm:w-auto text-center px-8 py-4 border-2 border-white/20 text-white font-semibold rounded-lg hover:border-white/40 hover:bg-white/5 transition-colors duration-300"
           >
             View Portfolio
           </Link>
@@ -683,10 +481,6 @@ function CTASection() {
     </section>
   )
 }
-
-// ============================================================================
-// Main Page Component
-// ============================================================================
 
 export default function AboutPage() {
   usePageMetadata(
@@ -700,8 +494,7 @@ export default function AboutPage() {
       backgroundAttachment: 'fixed',
       backgroundPosition: 'center',
     }}>
-      {/* Black overlay with 30% opacity */}
-      <div className="fixed inset-0 bg-black/30 pointer-events-none z-0"></div>
+      <div className="fixed inset-0 bg-black/40 pointer-events-none z-0" />
       <div className="relative z-10">
         <Header />
         <main className="w-full">
@@ -711,7 +504,7 @@ export default function AboutPage() {
           <ExpertiseSection />
           <ProcessSection />
           <RecentProjectsSection />
-          <TrustSection />
+          <TrustMetrics />
           <CTASection />
         </main>
         <Footer />

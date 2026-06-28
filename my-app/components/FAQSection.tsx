@@ -53,11 +53,11 @@ export default function FAQSection({
           variants={containerVariants}
           className="text-center mb-12"
         >
-          <motion.h2 variants={itemVariants} className="text-4xl sm:text-5xl font-bold text-white mb-4">
+          <motion.h2 variants={itemVariants} className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
             {title}
           </motion.h2>
-          <motion.div variants={itemVariants} className="w-16 h-1 bg-gradient-to-r from-blue-600 to-slate-700 mx-auto mb-6" />
-          <motion.p variants={itemVariants} className="text-lg text-gray-200 max-w-2xl mx-auto">
+          <motion.div variants={itemVariants} className="w-16 h-1 bg-gradient-to-r from-blue-500 to-cyan-400 mx-auto mb-6" />
+          <motion.p variants={itemVariants} className="text-lg text-gray-300 max-w-2xl mx-auto">
             {subtitle}
           </motion.p>
         </motion.div>
@@ -78,11 +78,12 @@ export default function FAQSection({
               <motion.div
                 key={faq.id}
                 variants={itemVariants}
-                className="bg-white/10 backdrop-blur-md rounded-xl border border-white/20 overflow-hidden"
+                className="bg-gray-800/60 backdrop-blur-sm rounded-xl border border-gray-700/50 overflow-hidden hover:border-blue-500/30 transition-colors"
               >
                 <button
                   onClick={() => setOpenId(openId === faq.id ? null : faq.id)}
                   className="w-full flex items-center justify-between p-5 text-left"
+                  aria-expanded={openId === faq.id}
                 >
                   <span className="text-white font-medium pr-4">{faq.question}</span>
                   <motion.div

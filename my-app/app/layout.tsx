@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
 import { Montserrat, Inter } from "next/font/google";
 import WhatsAppButton from "../components/WhatsAppButton";
-import StickyMobileCTA from "../components/StickyMobileCTA";
 import Script from "next/script";
 import "./globals.css";
 
-// Heading font
 const montserrat = Montserrat({
   subsets: ["latin"],
   weight: ["500", "600", "700"],
@@ -13,7 +11,6 @@ const montserrat = Montserrat({
   display: "swap",
 });
 
-// Body font
 const inter = Inter({
   subsets: ["latin"],
   weight: ["400", "500"],
@@ -76,7 +73,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" data-scroll-behavior="smooth">
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -110,9 +107,8 @@ export default function RootLayout({
             }),
           }}
         />
-        <main className="flex-1 font-body pb-16 md:pb-0">{children}</main>
+        <main className="flex-1 font-body">{children}</main>
         <WhatsAppButton />
-        <StickyMobileCTA />
       </body>
     </html>
   );

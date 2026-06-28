@@ -30,7 +30,6 @@ export async function GET(request: NextRequest) {
       include: {
         images: {
           orderBy: { sortOrder: "asc" },
-          take: 1,
         },
       },
       orderBy: { sortOrder: "asc" },

@@ -77,45 +77,49 @@ export default function QuoteRequestForm() {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-50px" }}
-      className="py-20 px-4 sm:px-6 lg:px-8 bg-transparent"
+      className="py-20 sm:py-32 px-4 sm:px-6 lg:px-8 bg-transparent"
     >
       <div className="max-w-3xl mx-auto">
         <motion.div variants={itemVariants} className="text-center mb-10">
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4">Request a Quote</h2>
-          <div className="w-16 h-1 bg-gradient-to-r from-blue-600 to-slate-700 mx-auto mb-6" />
-          <p className="text-lg text-gray-200 max-w-2xl mx-auto">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">Request a Quote</h2>
+          <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-cyan-400 mx-auto mb-6" />
+          <p className="text-lg text-gray-300 max-w-2xl mx-auto">
             Tell us about your project and we&apos;ll provide a detailed quote within 24 hours.
           </p>
         </motion.div>
 
         <motion.div
           variants={itemVariants}
-          className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-5 sm:p-6 lg:p-8"
+          className="bg-gray-800/60 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-5 sm:p-6 lg:p-8"
         >
           {success ? (
             <div className="text-center py-12">
-              <div className="text-4xl mb-4">✓</div>
+              <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
               <h3 className="text-xl font-semibold text-white mb-2">Quote Request Sent!</h3>
-              <p className="text-gray-200 mb-6">We&apos;ll review your project and get back to you within 24 hours.</p>
+              <p className="text-gray-300 mb-6">We&apos;ll review your project and get back to you within 24 hours.</p>
               <button onClick={() => setSuccess(false)}
-                className="px-6 py-2.5 bg-white/20 hover:bg-white/30 text-white rounded-lg text-sm font-medium transition">
+                className="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium transition">
                 Submit Another
               </button>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+            <form onSubmit={handleSubmit} className="space-y-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label htmlFor="clientName" className="block text-sm font-medium text-gray-200 mb-1.5">Full Name *</label>
                   <input type="text" id="clientName" name="clientName" value={formData.clientName} onChange={handleChange} required
                     placeholder="Your name" autoComplete="name"
-                    className="w-full px-4 py-3 sm:py-2.5 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
+                    className="w-full px-4 py-3 bg-gray-900/60 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
                 </div>
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-gray-200 mb-1.5">Email *</label>
                   <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required
                     placeholder="your@email.com" autoComplete="email"
-                    className="w-full px-4 py-3 sm:py-2.5 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
+                    className="w-full px-4 py-3 bg-gray-900/60 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
                 </div>
               </div>
 
@@ -124,15 +128,15 @@ export default function QuoteRequestForm() {
                   <label htmlFor="phone" className="block text-sm font-medium text-gray-200 mb-1.5">Phone *</label>
                   <input type="tel" id="phone" name="phone" value={formData.phone} onChange={handleChange} required
                     placeholder="+92 300 1234567" autoComplete="tel"
-                    className="w-full px-4 py-3 sm:py-2.5 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
+                    className="w-full px-4 py-3 bg-gray-900/60 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
                 </div>
                 <div>
                   <label htmlFor="serviceId" className="block text-sm font-medium text-gray-200 mb-1.5">Service Needed</label>
                   <select id="serviceId" name="serviceId" value={formData.serviceId} onChange={handleChange}
-                    className="w-full px-4 py-3 sm:py-2.5 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm">
-                    <option value="" className="bg-gray-800">Select a service</option>
+                    className="w-full px-4 py-3 bg-gray-900/60 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm">
+                    <option value="" className="bg-gray-900">Select a service</option>
                     {services.map((s) => (
-                      <option key={s.id} value={s.id} className="bg-gray-800">{s.title}</option>
+                      <option key={s.id} value={s.id} className="bg-gray-900">{s.title}</option>
                     ))}
                   </select>
                 </div>
@@ -143,7 +147,7 @@ export default function QuoteRequestForm() {
                 <textarea id="projectScope" name="projectScope" value={formData.projectScope} onChange={handleChange} required
                   placeholder="Tell us about your project — type of work, materials, dimensions, quantity, etc."
                   rows={3}
-                  className="w-full px-4 py-3 sm:py-2.5 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm resize-none" />
+                  className="w-full px-4 py-3 bg-gray-900/60 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm resize-none" />
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -151,19 +155,19 @@ export default function QuoteRequestForm() {
                   <label htmlFor="timeline" className="block text-sm font-medium text-gray-200 mb-1.5">Preferred Timeline</label>
                   <input type="text" id="timeline" name="timeline" value={formData.timeline} onChange={handleChange}
                     placeholder="e.g., Within 2 weeks" autoComplete="off"
-                    className="w-full px-4 py-3 sm:py-2.5 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
+                    className="w-full px-4 py-3 bg-gray-900/60 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
                 </div>
                 <div>
                   <label htmlFor="location" className="block text-sm font-medium text-gray-200 mb-1.5">Location</label>
                   <input type="text" id="location" name="location" value={formData.location} onChange={handleChange}
                     placeholder="City / Area" autoComplete="address-level2"
-                    className="w-full px-4 py-3 sm:py-2.5 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
+                    className="w-full px-4 py-3 bg-gray-900/60 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
                 </div>
                 <div>
                   <label htmlFor="budget" className="block text-sm font-medium text-gray-200 mb-1.5">Budget Range</label>
                   <input type="text" id="budget" name="budget" value={formData.budget} onChange={handleChange}
                     placeholder="e.g., 50,000 - 100,000 PKR" autoComplete="off"
-                    className="w-full px-4 py-3 sm:py-2.5 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
+                    className="w-full px-4 py-3 bg-gray-900/60 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
                 </div>
               </div>
 
@@ -174,7 +178,7 @@ export default function QuoteRequestForm() {
               )}
 
               <button type="submit" disabled={submitting}
-                className="w-full py-3 bg-gradient-to-r from-blue-600 to-slate-700 hover:from-blue-700 hover:to-slate-800 text-white font-semibold rounded-lg transition disabled:opacity-50">
+                className="w-full py-3.5 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed text-sm">
                 {submitting ? "Submitting..." : "Submit Quote Request"}
               </button>
             </form>

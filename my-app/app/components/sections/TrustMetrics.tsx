@@ -24,14 +24,6 @@ const itemVariants: Variants = {
   },
 }
 
-const fadeInVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { duration: 0.8 },
-  },
-}
-
 function useAnimatedCounter(target: string) {
   const match = target.match(/^(\d+(?:\.\d+)?)\s*(.*)$/)
   const cannotAnimate = !match || target.includes("/")
@@ -112,24 +104,25 @@ export default function TrustMetrics() {
             <motion.div
               key={index}
               variants={itemVariants}
-              className="text-center p-6 bg-white/10 rounded-xl backdrop-blur-md border border-white/20 hover:border-white/30 transition-all duration-300 hover:bg-white/15 hover:shadow-lg hover:scale-105"
+              className="text-center p-6 sm:p-8 bg-gray-800/60 backdrop-blur-sm rounded-xl border border-gray-700/50 hover:border-blue-500/30 transition-all duration-300 hover:bg-gray-700/60 hover:shadow-xl"
             >
               <div className="text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent mb-2">
                 <AnimatedCounter number={stat.number} />
               </div>
-              <p className="text-base sm:text-lg text-gray-200">{stat.label}</p>
+              <p className="text-base sm:text-lg text-gray-300">{stat.label}</p>
             </motion.div>
           ))}
         </motion.div>
 
         <motion.div
-          initial="hidden"
+          initial={{ opacity: 0 }}
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          variants={fadeInVariants}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
           className="mt-16 text-center"
         >
-          <p className="text-base sm:text-lg lg:text-xl text-gray-200 mb-8 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg lg:text-xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
             Over a decade of consistent delivery has earned us the trust of
             hundreds of satisfied clients. We&apos;re not just a service
             provider&mdash;we&apos;re a partner invested in your project&apos;s
