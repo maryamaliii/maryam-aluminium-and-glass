@@ -150,7 +150,7 @@ export default function RootLayout({
                 "Premium aluminium fabrication and modern glass solutions. Specializing in windows, doors, mirrors, wardrobes, kitchen glass, partitions, custom fabrication, and installation.",
               url: BASE_URL,
               telephone: "+923233541250",
-              email: "harisanwarali@gmail.com",
+              email: "info@meerengineering.com",
               address: {
                 "@type": "PostalAddress",
                 addressCountry: "PK",

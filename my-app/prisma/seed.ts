@@ -401,7 +401,7 @@ async function main() {
     {
       key: "contact-info",
       value: JSON.stringify({
-        email: "harisanwarali@gmail.com",
+        email: "info@meerengineering.com",
         phone: "+92 3233541250",
         location: "Pakistan",
         availability: "9 AM - 6 PM",
@@ -451,7 +451,7 @@ async function main() {
 
   await prisma.adminUser.create({
     data: {
-      email: "harisanwarali@gmail.com",
+      email: "info@meerengineering.com",
       passwordHash,
       name: "Super Admin",
       role: AdminRole.SUPER_ADMIN,
@@ -469,7 +469,7 @@ async function main() {
     },
   });
 
-  console.log("  ✓ Super Admin created (harisanwarali@gmail.com / admin123)");
+  console.log("  ✓ Super Admin created (info@meerengineering.com / admin123)");
   console.log("  ✓ Admin created (admin@maryam.com / admin123)");
   console.log("\n✅ Seeding complete!");
 }

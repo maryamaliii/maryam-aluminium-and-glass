@@ -34,7 +34,7 @@ export default function TermsPage() {
           <h2 className="text-xl font-semibold text-white mt-8">Contact Us</h2>
           <p>
             For questions about these terms, contact us at{' '}
-            <a href="mailto:harisanwarali@gmail.com" className="text-blue-400 hover:underline">harisanwarali@gmail.com</a>{' '}
+            <a href="mailto:info@meerengineering.com" className="text-blue-400 hover:underline">info@meerengineering.com</a>{' '}
             or call <a href="tel:+923233541250" className="text-blue-400 hover:underline">+92 323 3541250</a>.
           </p>
         </div>

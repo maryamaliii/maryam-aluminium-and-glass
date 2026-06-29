@@ -1,7 +1,8 @@
 "use client"
 
-import { useState, useEffect, lazy, Suspense } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
+import dynamic from "next/dynamic"
 import Header from "@/app/components/Header"
 import Footer from "@/app/components/Footer"
 import CompanyStory from "@/app/components/sections/CompanyStory"
@@ -11,8 +12,12 @@ import ProjectsSection from "@/components/ProjectsSection"
 import ProcessWorkflow from "@/components/ProcessWorkflow"
 import type { ProjectResponse } from "@/types"
 
-const TestimonialsSection = lazy(() => import("@/components/TestimonialsSection"))
-const QuoteRequestForm = lazy(() => import("@/components/QuoteRequestForm"))
+const TestimonialsSection = dynamic(() => import("@/components/TestimonialsSection"), {
+  loading: () => <div className="py-20 text-center text-gray-400">Loading...</div>,
+})
+const QuoteRequestForm = dynamic(() => import("@/components/QuoteRequestForm"), {
+  loading: () => <div className="py-20 text-center text-gray-400">Loading...</div>,
+})
 
 export default function HomePageClient() {
   const [projects, setProjects] = useState<ProjectResponse[]>([])
@@ -111,12 +116,8 @@ export default function HomePageClient() {
           )}
 
           <ProcessWorkflow />
-          <Suspense fallback={<div className="py-20 text-center text-gray-400">Loading...</div>}>
-            <QuoteRequestForm />
-          </Suspense>
-          <Suspense fallback={<div className="py-20 text-center text-gray-400">Loading...</div>}>
-            <TestimonialsSection />
-          </Suspense>
+          <QuoteRequestForm />
+          <TestimonialsSection />
           <TrustMetrics />
         </div>
 

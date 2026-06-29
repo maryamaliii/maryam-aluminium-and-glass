@@ -167,7 +167,7 @@ export default function ContactPageClient() {
                     </div>
                     <div>
                       <h3 className="text-lg font-semibold text-white">Email</h3>
-                      <a href="info@meerengineering.com" className="text-gray-300 hover:text-white transition">
+                      <a href="mailto:info@meerengineering.com" className="text-gray-300 hover:text-white transition">
                         info@meerengineering.com
                       </a>
                       <p className="text-gray-400 text-sm">Response within 24 hours</p>

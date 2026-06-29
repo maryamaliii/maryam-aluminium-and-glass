@@ -57,14 +57,29 @@ const ServiceCardWithSlider = ({ title, description, icon: Icon, images }: Servi
                 animate={{ opacity: index === currentIndex ? 1 : 0 }}
                 transition={{ duration: 0.5 }}
               >
-                <Image
-                  src={imgSrc}
-                  alt={`${title} - Image ${index + 1}`}
-                  fill
-                  className="object-cover"
-                  priority={index === 0}
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                />
+                <div className="relative w-full h-full">
+                  <div className="absolute inset-0 overflow-hidden">
+                    <Image
+                      src={imgSrc}
+                      alt=""
+                      fill
+                      className="object-cover blur-2xl scale-110 opacity-60"
+                      aria-hidden="true"
+                      priority={index === 0}
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    />
+                  </div>
+                  <div className="absolute inset-0">
+                    <Image
+                      src={imgSrc}
+                      alt={`${title} - Image ${index + 1}`}
+                      fill
+                      className="object-contain"
+                      priority={index === 0}
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    />
+                  </div>
+                </div>
               </motion.div>
             ))}
 

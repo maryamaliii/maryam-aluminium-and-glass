@@ -28,6 +28,7 @@ export const contactFormSchema = z.object({
     .min(10, "Message must be at least 10 characters")
     .max(2000, "Message must be 2000 characters or less")
     .transform(stripHtml),
+  _hp: z.string().optional(),
 });
 
 export const loginSchema = z.object({

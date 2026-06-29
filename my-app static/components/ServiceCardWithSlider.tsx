@@ -108,25 +108,32 @@ const ServiceCardWithSlider = ({ title, description, icon: Icon, images }: Servi
                 }}
               >
                 <motion.div
-                  className="w-full h-full"
+                  className="relative w-full h-full"
                   whileHover={{ scale: 1.03 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <Image
-                    src={imgSrc}
-                    alt={`${title} - Image ${index + 1}`}
-                    fill
-                    className="object-cover"
-                    priority={index === 0}
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    quality={95}
-                    onLoadingComplete={(img) => {
-                      if (index === 0) {
-                        img.style.transform = 'scale(1)';
-                        img.style.transition = 'transform 0.3s ease';
-                      }
-                    }}
-                  />
+                  <div className="absolute inset-0 overflow-hidden">
+                    <Image
+                      src={imgSrc}
+                      alt=""
+                      fill
+                      className="object-cover blur-2xl scale-110 opacity-60"
+                      aria-hidden="true"
+                      priority={index === 0}
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    />
+                  </div>
+                  <div className="absolute inset-0">
+                    <Image
+                      src={imgSrc}
+                      alt={`${title} - Image ${index + 1}`}
+                      fill
+                      className="object-contain"
+                      priority={index === 0}
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      quality={95}
+                    />
+                  </div>
                 </motion.div>
               </motion.div>
             ))}

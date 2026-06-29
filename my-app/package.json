@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:clean": "powershell -NoProfile -Command \"$retry=3; do { try { if(Test-Path '.next'){Remove-Item '.next' -Recurse -Force -ErrorAction Stop; Write-Output 'Cleaned .next'} } catch { $retry--; Start-Sleep 1 } } while($retry -gt 0 -and (Test-Path '.next'))\" && next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
