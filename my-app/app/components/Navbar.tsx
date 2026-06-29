@@ -58,6 +58,7 @@ export default function Navbar() {
           <Link
             key={link.href}
             href={link.href}
+            aria-current={pathname === link.href ? "page" : undefined}
             className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
               pathname === link.href
                 ? "text-white bg-white/10"
@@ -96,6 +97,7 @@ export default function Navbar() {
                 >
                   <Link
                     href={link.href}
+                    aria-current={pathname === link.href ? "page" : undefined}
                     className={`block px-5 py-3 mx-2 rounded-lg text-sm font-medium transition-colors ${
                       pathname === link.href
                         ? "text-white bg-blue-600/20 text-blue-300"

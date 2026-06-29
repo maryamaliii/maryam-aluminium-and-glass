@@ -5,6 +5,28 @@ import { motion, AnimatePresence } from "framer-motion";
 import { MdExpandMore } from "react-icons/md";
 import type { FAQResponse } from "@/types";
 
+function addFAQSchema(faqs: FAQResponse[]) {
+  const existing = document.getElementById("schema-faq-dynamic");
+  if (existing) existing.remove();
+  if (faqs.length === 0) return;
+  const script = document.createElement("script");
+  script.id = "schema-faq-dynamic";
+  script.type = "application/ld+json";
+  script.textContent = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  });
+  document.head.appendChild(script);
+}
+
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -35,7 +57,10 @@ export default function FAQSection({
     fetch("/api/faq")
       .then((res) => res.json())
       .then((data) => {
-        if (data.success) setFaqs(data.data);
+        if (data.success) {
+          setFaqs(data.data);
+          addFAQSchema(data.data);
+        }
       })
       .catch(console.error)
       .finally(() => setLoading(false));

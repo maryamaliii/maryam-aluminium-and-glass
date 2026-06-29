@@ -125,10 +125,10 @@ const Footer = () => {
               © {currentYear} Meer Engineering. All rights reserved.
             </p>
             <div className="flex items-center gap-6 text-sm text-gray-500">
-              <Link href="/" className="hover:text-white transition-colors duration-200">
+              <Link href="/privacy-policy" className="hover:text-white transition-colors duration-200" aria-label="Privacy Policy">
                 Privacy Policy
               </Link>
-              <Link href="/" className="hover:text-white transition-colors duration-200">
+              <Link href="/terms" className="hover:text-white transition-colors duration-200" aria-label="Terms and Conditions">
                 Terms & Conditions
               </Link>
             </div>

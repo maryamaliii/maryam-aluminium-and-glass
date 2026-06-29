@@ -1,14 +1,17 @@
 import { MetadataRoute } from "next";
 
-const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || "https://meer-engineering.vercel.app";
+const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || "https://meerengineering.com";
 
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       {
         userAgent: "*",
-        allow: "/",
-        disallow: ["/admin/", "/api/"],
+        disallow: ["/admin/", "/api/", "/_next/"],
+      },
+      {
+        userAgent: "GPTBot",
+        disallow: "/",
       },
     ],
     sitemap: `${BASE_URL}/sitemap.xml`,
