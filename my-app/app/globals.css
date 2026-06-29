@@ -37,6 +37,73 @@ html {
   scroll-behavior: smooth;
 }
 
+.bg-overlay {
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  background-image: url('/bg.webp');
+}
+
+@media (max-width: 768px) {
+  .bg-overlay {
+    background-image: url('/bg-768.webp');
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .bg-overlay {
+    background-image: url('/bg-1024.webp');
+  }
+}
+
+.hero-fade-in {
+  opacity: 0;
+  animation: heroFadeIn 0.8s ease-out forwards;
+}
+
+@keyframes heroFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-fade-in-delay-1 { animation-delay: 0.1s; }
+.hero-fade-in-delay-2 { animation-delay: 0.2s; }
+.hero-fade-in-delay-3 { animation-delay: 0.3s; }
+
+.whatsapp-enter {
+  animation: whatsappEnter 0.3s ease-out 0.5s forwards;
+  opacity: 0;
+}
+
+@keyframes whatsappEnter {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.whatsapp-hover {
+  transition: transform 0.2s ease;
+}
+
+.whatsapp-hover:hover {
+  transform: scale(1.1);
+}
+
+.whatsapp-active:active {
+  transform: scale(0.95);
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -48,6 +115,14 @@ html {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+  .hero-fade-in {
+    opacity: 1;
+    animation: none;
+  }
+  .whatsapp-enter {
+    opacity: 1;
+    animation: none;
   }
 }
 

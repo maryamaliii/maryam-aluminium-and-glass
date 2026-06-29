@@ -483,12 +483,7 @@ function CTASection() {
 
 export default function AboutPageClient() {
   return (
-    <div className="w-full" style={{
-      backgroundImage: "url('/bg.jpg')",
-      backgroundSize: 'cover',
-      backgroundAttachment: 'fixed',
-      backgroundPosition: 'center',
-    }}>
+    <div className="w-full bg-overlay">
       <div className="fixed inset-0 bg-black/40 pointer-events-none z-0" />
       <div className="relative z-10">
         <Header />

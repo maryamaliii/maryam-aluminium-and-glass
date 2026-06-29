@@ -59,7 +59,7 @@ const nextConfig: NextConfig = {
         ],
       },
       {
-        source: "/bg.jpg",
+        source: "/(bg.*)",
         headers: [
           {
             key: "Cache-Control",

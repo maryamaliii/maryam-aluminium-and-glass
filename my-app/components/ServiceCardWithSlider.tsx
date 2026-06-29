@@ -89,7 +89,7 @@ const ServiceCardWithSlider = ({ title, description, icon: Icon, images }: Servi
                     alt={`${title} — Meer Engineering service image ${index + 1}`}
                     fill
                     className="object-cover"
-                    priority={index === 0}
+                    loading={index === 0 ? undefined : "lazy"}
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
                 </motion.div>

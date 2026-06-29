@@ -46,15 +46,7 @@ export default function ProjectsPageClient() {
     : projects;
 
   return (
-    <div
-      className="w-full min-h-screen"
-      style={{
-        backgroundImage: "url('/bg.jpg')",
-        backgroundSize: "cover",
-        backgroundAttachment: "fixed",
-        backgroundPosition: "center",
-      }}
-    >
+    <div className="w-full min-h-screen bg-overlay">
       <div className="fixed inset-0 bg-black/40 pointer-events-none z-0" />
 
       <div className="relative z-10">

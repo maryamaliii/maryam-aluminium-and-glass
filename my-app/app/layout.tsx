@@ -111,7 +111,9 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <meta name="theme-color" content="#0a0a0a" />
-        <link rel="preload" as="image" href="/bg.jpg" />
+        <link rel="preload" as="image" href="/bg.webp" type="image/webp" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
       <body
         className={`${montserrat.variable} ${inter.variable} antialiased flex min-h-screen flex-col`}
