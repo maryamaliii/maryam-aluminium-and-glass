@@ -36,6 +36,12 @@ yarn-error.log*
 # vercel
 .vercel
 
+# backup directories
+../host.rar
+../host/
+../my-app 2/
+../my-app static/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
