@@ -212,12 +212,12 @@ function StorySection() {
                 </svg>
                 <p className="text-lg font-semibold">Workspace/Team Image</p>
                 <p className="text-sm mt-2 opacity-75">
-                  Replace with: /images/about-workspace.jpg
+                  Replace with: /workshop.png
                 </p>
               </div>
             </div>
             <Image
-              src="/images/about-workspace.jpg"
+              src="/workshop.png"
               alt="Maryam Aluminium & Glass workspace"
               fill
               className="object-cover"

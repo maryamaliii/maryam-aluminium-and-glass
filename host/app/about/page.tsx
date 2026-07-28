@@ -177,7 +177,7 @@ function StorySection() {
             className="relative h-64 sm:h-80 lg:h-[500px] rounded-2xl overflow-hidden shadow-2xl"
           >
             <Image
-              src="/images/about-workspace.jpg"
+              src="/workshop.png"
               alt="Meer Engineering workspace"
               fill
               className="object-cover"

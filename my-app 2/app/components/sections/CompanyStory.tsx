@@ -78,7 +78,7 @@ export default function CompanyStory() {
             className="relative h-72 sm:h-96 rounded-2xl overflow-hidden shadow-2xl"
           >
             <Image
-              src="/images/about-workspace.jpg"
+              src="/workshop.png"
               alt="Company workspace and team"
               fill
               className="object-cover"
